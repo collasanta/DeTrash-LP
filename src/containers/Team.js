@@ -5,7 +5,7 @@ import TeamCard from '../cards/TeamCard';
 const styles = {
    container: `space-y-4 p-[40px] flex flex-col justify-center bg-[#ffffff]   `,
    container2: `space-y-4 flex flex-col md:flex-row justify-center bg-[#ffffff]`,
-   cardcontainer: `flex flex-col justify-center bg-[#ffffff] md:flex-row     `,
+   cardcontainer: `flex flex-col justify-center bg-[#ffffff] md:flex-row      `,
    header: `font-[minitel] text-[25px] text-center px-[20px] leading-[50px] md:text-[30px]`,
    purple: `text-[#6e45c7]`,
 }
