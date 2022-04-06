@@ -29,7 +29,7 @@ const Traits = () => {
          <div className={styles.header}>RARITY <span className={styles.purple}>TRAITS</span></div>
 
          <div className={styles.imagecontainer}>
-            <img className={styles.image} src={images.traitsgif}></img>
+            <img className={styles.image} src={images.traitsgif} alt=""></img>
          </div>
          <p className={styles.description}>
             All the developers are random generated at the moment you mint them, there is a sum of 35 total traits, each one with a specific rarity and % of spawning.

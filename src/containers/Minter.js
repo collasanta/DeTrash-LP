@@ -27,7 +27,7 @@ const Minter = () => {
             <div className={styles.div1}>
 
                <div className={styles.image}>
-                  <img  src={images.phidden}/>
+                  <img  src={images.phidden} alt=""/>
                </div>
 
                <div className={styles.supply}>

@@ -17,7 +17,7 @@ const TraitItem = ({ itemname, chance, img }) => {
       <div className={styles.container}>
 
          <div className={styles.imagebox}>
-            <img className={styles.image} src={img}></img>
+            <img className={styles.image} src={img} alt=""></img>
          </div>
 
          <div className={styles.info}>
