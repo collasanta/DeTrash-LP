@@ -3,7 +3,7 @@ import { HiMenuAlt4, HiX } from 'react-icons/hi';
 import { motion } from 'framer-motion';
 
 const styles = {
-   wrapper: `z-[1] shadow-sm fixed  px-8 h-[70px]  w-full flex justify-between items-center bg-[#f2f5fa] text-black `,
+   wrapper: `z-[1] shadow-sm fixed  px-8 h-[70px]  w-screen flex justify-between items-center bg-[#f2f5fa] text-black overflow:hidden `,
    logo: `flex w-1/8 items-center justify-start font-['pix'] text-[2rem] text-[#78818e]  `,
    logospan: `text-[#6e45c7]`,
    menu: `hidden md:flex block `,

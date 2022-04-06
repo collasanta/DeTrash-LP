@@ -3,14 +3,14 @@ import { images } from '../assets';
 import TraitCard from '../cards/TraitCard';
 
 const styles = {
-   container1: `space-y-4 py-[50px] flex flex-col justify-center bg-[#edf2f8]  `,
+   container1: `space-y-4 py-[50px] flex flex-col justify-center bg-[#edf2f8]   `,
    container2: `space-y-4 py-[50px] flex flex-col justify-center bg-[#edf2f8] text-black  `,
    header: `font-[minitel]  text-[25px] text-center px-[20px] leading-[50px] md:text-[30px]`,
-   image: `max-w-[400px] md:max-w-[600px]`,
+   image: `max-w-[375px] md:max-w-[600px]`,
    imagecontainer: `flex justify-center`,
    description: `font-[minitel] text-center text-[#7c8591] px-[35px] `,
    purple: `text-[#6e45c7]`,
-   container3:`py-10 px-10 space-y-[50px]`
+   container3:`py-10 space-y-[50px]`
 }
 
 let traitsdata = [
