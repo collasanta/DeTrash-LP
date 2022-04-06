@@ -52,7 +52,6 @@ import t38 from './t (38).png';
 
 
 export default {
-   headerlogo,
    p1,
    p2,
    p3,
