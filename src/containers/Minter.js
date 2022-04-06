@@ -32,7 +32,7 @@ const Minter = () => {
 
                <div className={styles.supply}>
                   <span>SUPPLY: </span>
-                  <a className={styles.asupply}>30</a>/10.000
+                  <span className={styles.asupply}>30</span>/10.000
                </div>
 
             </div>
