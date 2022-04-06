@@ -31,11 +31,9 @@ const Traits = () => {
          <div className={styles.imagecontainer}>
             <img className={styles.image} src={images.traitsgif} alt=""></img>
          </div>
-         <p className={styles.description}>
-            All the developers are random generated at the moment you mint them, there is a sum of 35 total traits, each one with a specific rarity and % of spawning.
-         </p>
-         <p className={styles.description}>
-            There are more than 20.000 possible random combinations
+         <p className={styles.description}>All the developers are <span className={styles.purple}>random generated</span> at the moment you mint them.</p>
+         <p className={styles.description}>The punks have <span className={styles.purple}>35 total traits</span>, each one with a specific rarity and % of spawning.</p>
+         <p className={styles.description}>There are more than <span className={styles.purple}>20.000</span> possible random combinations
          </p>
      </div>
 
