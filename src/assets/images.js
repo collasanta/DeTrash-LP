@@ -48,6 +48,11 @@ import t35 from './t (35).png';
 import t36 from './t (36).png';
 import t37 from './t (37).png';
 import t38 from './t (38).png';
+import rm1 from './rm1.png';
+import rm2 from './rm2.png';
+import rm3 from './rm3.png';
+import rm4 from './rm4.png';
+
 
 
 export default {
@@ -101,4 +106,8 @@ export default {
    t36,
    t37,
    t38,
+   rm1,
+   rm2,
+   rm3,
+   rm4,
  };

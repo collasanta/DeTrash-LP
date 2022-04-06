@@ -19,7 +19,7 @@ let traitsdata = [
    [["PC COLOR"],[{name:"Space Grey", chance:"33%", img: images.t37 }, {name:"Grey", chance:"33%", img: images.t26 }, {name:"Rose", chance:"33%", img: images.t25 }]],
    [["PC BRAND"],[{name:"AlienWarez", chance:"10%", img: images.t11 }, {name:"Windowsz", chance:"40%", img: images.t12 }, {name:"Applez", chance:"40%", img: images.t13 }]],
    [["SKIN"],[{name:"Alien", chance:"10%", img: images.t27 }, {name:"Asian", chance:"30%", img: images.t30 }, {name:"Black", chance:"30%", img: images.t28 }, {name:"Black", chance:"30%", img: images.t29 }]],
-   [["BACKGROUND"],[{name:"Green", chance:"25%%", img: images.t31 }, {name:"Blue", chance:"25%", img: images.t32 }, {name:"Rose", chance:"25%", img: images.t34 }, {name:"Purple33", chance:"25%", img: images.t33 }]],
+   [["BACKGROUND"],[{name:"Green", chance:"25%", img: images.t31 }, {name:"Blue", chance:"25%", img: images.t32 }, {name:"Rose", chance:"25%", img: images.t34 }, {name:"Purple33", chance:"25%", img: images.t33 }]],
 ]
  
 const Traits = () => {

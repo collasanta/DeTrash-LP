@@ -1,18 +1,18 @@
 import React from 'react'
 
-const RoadmapCard = ({cardinfo}) => {
+const TeamCard = ({cardinfo}) => {
    const title = cardinfo.title
    const description = cardinfo.description
    const image = cardinfo.image
 
    const styles = {
-      container: ` p-3 m-3 md:min-w-[400px]  flex flex-col md:flex-row mx-auto  `,
-      container2: `flex flex-col mx-auto space-y-[-20px] justify-center `,
-      image: ` w-[100px] h-[110px] mx-auto mb-[20px] `,
-      titlebox: `z-0 hover:bg-[#bcbae5] bg-[#6e45c7] shadow-md w-[290px]  h-[60px] mx-auto py-[5px]  rounded-full `,
+      container: ` p-3 m-3 md:min-w-[300px]  flex flex-row md: justify-center md:flex-col mx-auto  `,
+      container2: `flex flex-col md:mx-auto md:space-y-[-20px] md:justify-center`,
+      image: ` w-[180px] h-[180px]  md:mx-auto md:mb-[20px]  `,
+      titlebox: `z-0 hover:bg-[#bcbae5] bg-[#6e45c7] shadow-md w-[280px]  h-[60px] mx-0 md:mx-auto py-[5px]  rounded-r-full `,
       title: ` font-[pix] text-white text-[30px] text-center   `,
-      descbox: `z-1 bg-[#ffffff] shadow-lg p-2 w-[280px] mx-[10px] rounded-[40px] pt-[30px] pb-[10px] `,
-      desc: ` font-[minitel] text-[17px] text-center   `,
+      descbox: `z-1 bg-[#f1f1f1] p-2 w-[280px] h-[120px] mx-[10px] pt-[30px] md:pt-[40px] mx-0 md:mx-auto pb-[10px] rounded-r-full  `,
+      desc: ` font-[minitel] text-[14px] text-center   `,
 
    }
 
@@ -45,4 +45,4 @@ const RoadmapCard = ({cardinfo}) => {
   )
 }
 
-export default RoadmapCard
+export default TeamCard

@@ -3,7 +3,7 @@ import { images } from '../assets';
 
 const styles = {
    bg: `bg-[#ffffff] p-10 flex justify-center`,
-   container: `p-6  flex flex-col sm:flex-row justify-center bg-[#f1f1f1] md:max-w-2xl shadow-lg  `,
+   container: `p-6  flex flex-col sm:flex-row justify-center bg-[#f2f5fa] md:max-w-2xl shadow-lg  `,
    div1: ` p-2 sm:w-1/2 flex flex-col justify-center text-center space-y-3`,
    div2: ` p-2 sm:w-1/2 align-middle text-center flex flex-col justify-center space-y-4` ,
    image: ` px-8 py-0 `,
