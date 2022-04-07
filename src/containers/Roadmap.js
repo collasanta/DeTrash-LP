@@ -13,7 +13,7 @@ const roadmapdata = [
    [{title:"1. MINT PHASE", description:"Official Launch of the 10.000 Developer Punks NFT Collection on Polygon, Availiable to Mint", image: images.rm1}],
    [{title:"2. COMMUNITY BUILD", description:"Official Launch of Discord Community for Web3 Devs, availiable only to Dev Punk Holders", image: images.rm2}],
    [{title:"3. TUTORIAL DROPS", description:"Launch of weekly tutorial videos on how to develop web3 applications inside the community", image: images.rm3}],
-   [{title:"4. WORLD MEETUPS", description:"Presential events around the world holded by the community, availiable only to members", image: images.rm4}],
+   [{title:"4. WORLD MEETUPS", description:"Online and presential events holded by the community, availiable only to members", image: images.rm4}],
 ]
 
 const Roadmap = () => {

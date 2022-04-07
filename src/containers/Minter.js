@@ -8,9 +8,9 @@ const styles = {
    div2: ` p-2 sm:w-1/2 align-middle text-center flex flex-col justify-center space-y-4` ,
    image: ` px-8 py-0 `,
    supply: `font-[pix] text-lg bg-[#ffffff] mx-10`,
-   btnconnect: `font-[pix] animate-pulse text-lg bg-[#6e45c7] hover:bg-[#45c76e] text-white font-bold py-2 px-4 mx-10 shadow-md`,
+   btnconnect: `font-[pix] animate-pulse text-lg bg-[#6e45c7] hover:bg-[#45c76e] text-white font-bold py-6 px-4 mx-2 shadow-md`,
    amount: `font-[pix] text-lg`,
-   btnmint: `font-[pix] text-lg bg-[#6e45c7] hover:bg-[#45c76e] text-white font-bold py-2 px-4 mx-10 shadow-md`,
+   btnmint: `font-[pix] text-lg bg-[#6e45c7] hover:bg-[#45c76e] text-white font-bold py-6 px-4 mx-2 shadow-md`,
    counterbtnp: `bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l`,
    counterbtnn: `bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r`,
    counter: `bg-gray-200 text-gray-800 font-bold py-3 px-4`,
@@ -33,6 +33,11 @@ const Minter = () => {
                <div className={styles.supply}>
                   <span>SUPPLY: </span>
                   <span className={styles.asupply}>30</span>/10.000
+               </div>
+
+               <div className={styles.supply}>
+                  <span>PRICE: </span>
+                  <span className={styles.asupply}>1</span> MATIC
                </div>
 
             </div>
