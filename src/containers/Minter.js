@@ -31,8 +31,8 @@ const styles = {
 
 
 const address = "0xA58E6e03E6584DCcBDbd1Fbf09b8D38122af811a"
-const provider =  new ethers.providers.JsonRpcProvider(["https://polygon-rpc.com/"])
-const contract =  new ethers.Contract(address, abi, provider) 
+const rpcurlprovider =  new ethers.providers.JsonRpcProvider(["https://polygon-rpc.com/"])
+const contract =  new ethers.Contract(address, abi, rpcurlprovider) 
 
 
 const Minter = () => {
@@ -48,16 +48,25 @@ const Minter = () => {
    
    window.onload = function () {
 
-      async function handlechange() {
+      async function handleaccountchange() {
          const accounts = await window.ethereum.request({ method: "eth_accounts" });
-         console.log("accounts",accounts)
          const isConnected = !!accounts.length;
          isConnected ? setWalletconnected(true) : setWalletconnected(false) 
-         console.log("isConnected",isConnected)
+      }
+
+      async function handlechainchange() {
+         const mmprovider = await new ethers.providers.Web3Provider(window.ethereum)
+         setMetamaskprovider(mmprovider)
+         console.log("newprovidersetted")
       }
 
       if (window.ethereum !== "undefined") {
-         window.ethereum.on('accountsChanged',() => {handlechange()} );
+         window.ethereum.on('accountsChanged',() => {handleaccountchange()} );
+         setmetamask(true)
+      } else {setmetamask(false)}
+      
+      if (window.ethereum !== "undefined") {
+         window.ethereum.on('chainChanged',() => {handlechainchange()} );
          setmetamask(true)
       } else {setmetamask(false)}
 
@@ -72,6 +81,14 @@ const Minter = () => {
    }
 
    async function mint() {
+      const chainIdbg = await window.ethereum.chainId
+      console.log("chainIdbg",chainIdbg)
+      console.log("metamaskprovider",metamaskprovider)
+
+      if (chainIdbg !== "0x89") {
+         window.alert("MetaMask is connect to wrong network! To Mint, Please First Connect your MetaMask to Polygon Mainnet Network (ID:137) before minting")
+         // setWalletconnected(false)
+      } else {
       const signer = await metamaskprovider.getSigner()  
       const signedcontract = await contract.connect(signer)
       const totalprice = nftcostwei * mintAmount
@@ -80,11 +97,12 @@ const Minter = () => {
       setmintingmodal(true)
       await minting.wait()
       setmintingmodal(false)
+      }
    }
 
    useEffect(() => {
-      const provider =  new ethers.providers.JsonRpcProvider("https://polygon-rpc.com/")
-      const contract =  new ethers.Contract(address, abi, provider) 
+      const rpcurlprovider =  new ethers.providers.JsonRpcProvider("https://polygon-rpc.com/")
+      const contract =  new ethers.Contract(address, abi, rpcurlprovider) 
 
       async function loaddata(){
          const nftcostbg = await contract.cost()
