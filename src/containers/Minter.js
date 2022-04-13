@@ -12,6 +12,7 @@ const styles = {
    div2: ` p-2 sm:w-1/2 align-middle text-center flex flex-col justify-center space-y-2` ,
    image: ` px-6 py-0 `,
    supply: `font-[pix] text-lg bg-[#ffffff] mx-6`,
+   metamaskerror: `font-[minitel] text-sm bg-[#ffffff] mx-6 capitalize p-1`,
    btnconnect: `font-[pix] w-full animate-pulse text-lg bg-[#6e45c7] hover:bg-[#45c76e] text-white font-bold p-4  shadow-md`,
    amount: `font-[pix] text-lg`,
    btnmint: `font-[pix] text-lg bg-[#6e45c7] hover:bg-[#45c76e] text-white font-bold py-4 px-6 shadow-md`,
@@ -20,7 +21,8 @@ const styles = {
    counter: `bg-gray-200 text-gray-800 font-bold py-3 px-4`,
    asupply: `text-[30px] text-[#45c76e]`,
    polygon: `max-w-[130px] mx-auto`,
-   spinner: `w-12 h-12 rounded-full animate-spin border-8 border-solid border-purple-500 border-t-transparent`,
+   modal: `mx-auto`,
+   spinner: `mx-auto mt-[100px] w-20 h-20 rounded-full animate-spin border-8 border-solid border-purple-500 border-t-transparent`,
    opensea: `max-w-[260px] mx-auto pt-[20px]`,
 
 }
@@ -139,8 +141,7 @@ const Minter = () => {
                            <a href="https://opensea.io/collection/33-devs-punks" target="_blank"><img className={styles.opensea}src={images.op}></img></a>
                         }
                      </div>
-                  : "Metamask Extension Not Detected! For minting, please install it and refresh the page."}               
-                  {console.log("walletconnected",walletconnected)}               
+                  : <div className={styles.metamaskerror}>Metamask Extension Not Detected! For minting, please install it and refresh the page </div>}                           
                   {walletconnected ?                
                      <div className={styles.amount}>
                         <div>Amount:</div>
@@ -162,7 +163,10 @@ const Minter = () => {
                   : "" } 
                </div>
              : 
-               <div class={styles.spinner}> </div> 
+               <div className={styles.modal}>
+                  <div className={styles.spinner}> </div>
+                  <span className={styles.supply}>TRANSACTION IN PROCESS</span>
+               </div> 
             }
          </div>
       </div>
