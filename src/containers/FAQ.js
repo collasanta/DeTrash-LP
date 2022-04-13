@@ -10,7 +10,7 @@ const styles = {
 }
 
 const faqdata = [
-   {questionid:'faq01',question:'what are the collection about?', answer:'The 33Devs represent all the devs and creators leading this web3 revolution, and holding them allow you to enter the exclusive 33Devs community, meeting other creators and having access to development content and events'},
+   {questionid:'faq01',question:'what are the collection about?', answer:'The 33Devs represent all the devs and creators leading this web3 revolution.  bY Holding one you are allowed to enter the exclusive 33Devs community, meeting other creators and having access to development content and events'},
    {questionid:'faq02', question:'how can i mint?', answer:'this is the official website, you can mint here until the supply is over, after that you can buy one directly from the opensea market'},
    {questionid:'faq04', question:'what is the minting price?', answer:'Only 0.75 MATIC (around U$1)'},
    {questionid:'faq03', question:'what are the benefits of the community?', answer:'A exclusive Discord Server with other developers and 33Devs Holders, with excluvise content dedicated to advance our development skills to the moon, you also will be able to join our presential and online meetups, all around the world'},

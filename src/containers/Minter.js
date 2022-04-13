@@ -21,47 +21,54 @@ const styles = {
    asupply: `text-[30px] text-[#45c76e]`,
    polygon: `max-w-[130px] mx-auto`,
    spinner: `w-12 h-12 rounded-full animate-spin border-8 border-solid border-purple-500 border-t-transparent`,
+   opensea: `max-w-[260px] mx-auto pt-[20px]`,
+
 }
 
+
 const address = "0xA58E6e03E6584DCcBDbd1Fbf09b8D38122af811a"
-const provider = new ethers.providers.Web3Provider(window.ethereum)
-const contract = new ethers.Contract(address, abi, provider) 
+const provider =  new ethers.providers.JsonRpcProvider(["https://polygon-rpc.com/"])
+const contract =  new ethers.Contract(address, abi, provider) 
+
 
 const Minter = () => {
    const [mintAmount, setmintAmount] = useState(1)
    const [metamask, setmetamask] = useState(false)
    const [walletconnected, setWalletconnected] = useState(false)
+   const [metamaskprovider, setMetamaskprovider] = useState([])
    const [nftcostwei, setnftcostwei] = useState("0")
    const [nftcosteth, setnftcosteth] = useState("0")
    const [price, setprice] = useState()
    const [totalSupply, setTotalsupply] = useState()
    const [mintingmodal, setmintingmodal] = useState(false)
    
-   async function loaddata(){
-      const nftcostbg = await contract.cost()
-      const nftcostwei =  await nftcostbg.toString()
-      setnftcostwei (nftcostwei)
-      const nftcostethx = nftcostwei / 1000000000000000000
-      const nftcosteth = nftcostethx.toFixed(4)
-      setnftcosteth (nftcosteth)
-      const totalSupplybn = await contract.totalSupply()
-      const totalSupply = await totalSupplybn.toString()
-      setTotalsupply (totalSupply)
-   } 
+   window.onload = function () {
 
-   async function connectMetamask () {
+      async function handlechange() {
+         const accounts = await window.ethereum.request({ method: "eth_accounts" });
+         console.log("accounts",accounts)
+         const isConnected = !!accounts.length;
+         isConnected ? setWalletconnected(true) : setWalletconnected(false) 
+         console.log("isConnected",isConnected)
+      }
 
-      window.ethereum == undefined ? setmetamask(false) : setmetamask(true)
+      if (window.ethereum !== "undefined") {
+         window.ethereum.on('accountsChanged',() => {handlechange()} );
+         setmetamask(true)
+      } else {setmetamask(false)}
+
    }
-   
+
+
    async function connectWallet () {
+      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      setMetamaskprovider(provider)
       await provider.send("eth_requestAccounts",[])
       setWalletconnected(true)   
-
    }
 
    async function mint() {
-      const signer = await provider.getSigner()  
+      const signer = await metamaskprovider.getSigner()  
       const signedcontract = await contract.connect(signer)
       const totalprice = nftcostwei * mintAmount
       const pay = {value: totalprice.toString() }
@@ -72,15 +79,29 @@ const Minter = () => {
    }
 
    useEffect(() => {
-     connectMetamask()   
-     loaddata()
+      const provider =  new ethers.providers.JsonRpcProvider("https://polygon-rpc.com/")
+      const contract =  new ethers.Contract(address, abi, provider) 
+
+      async function loaddata(){
+         const nftcostbg = await contract.cost()
+         const nftcostwei =  await nftcostbg.toString()
+         setnftcostwei (nftcostwei)
+         const nftcostethx = await nftcostwei / 1000000000000000000
+         const nftcosteth = await nftcostethx.toFixed(4)
+         setnftcosteth (nftcosteth)
+         const totalSupplybn = await contract.totalSupply()
+         const totalSupply = await totalSupplybn.toString()
+         setTotalsupply (totalSupply)
+      } 
+   
+      loaddata()
+
    }, [])
    
    useEffect(() => {
       const pricecount = mintAmount * nftcosteth
       const priceformatted = pricecount.toLocaleString("en-US", { maximumFractionDigits: 4, minimumFractionDigits: 1 })
       setprice(priceformatted)
-      console.log("price",priceformatted)
     }, [mintAmount, nftcosteth])
 
 
@@ -111,10 +132,15 @@ const Minter = () => {
                   {metamask ?
 
                      <div className={styles.btndiv} > 
-                        { walletconnected ? "" : <button className={styles.btnconnect} onClick={() => {connectWallet()}}>CONNECT WALLET</button> }
+                        { walletconnected ? "" :
+                           <button className={styles.btnconnect} onClick={() => {connectWallet()}}>CONNECT WALLET</button>    
+                        }
+                        { walletconnected ? "" :
+                           <a href="https://opensea.io/collection/33-devs-punks" target="_blank"><img className={styles.opensea}src={images.op}></img></a>
+                        }
                      </div>
                   : "Metamask Extension Not Detected! For minting, please install it and refresh the page."}               
-                                 
+                  {console.log("walletconnected",walletconnected)}               
                   {walletconnected ?                
                      <div className={styles.amount}>
                         <div>Amount:</div>
@@ -127,7 +153,6 @@ const Minter = () => {
                   {walletconnected ?  
                   <div className={styles.supply}>
                         <span>PRICE: </span>
-                        {console.log("nftcosteth",nftcosteth)}
                         <span className={styles.asupply}>{mintAmount * nftcosteth == 0 ? "FREE" : price }</span> {mintAmount * nftcosteth == 0 ? "to mint" : "MATIC" }
                      </div>
                   : "" }
@@ -139,12 +164,8 @@ const Minter = () => {
              : 
                <div class={styles.spinner}> </div> 
             }
-
-
-
          </div>
       </div>
-
 
     </>
   )
