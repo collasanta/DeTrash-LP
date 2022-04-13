@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { HiMenuAlt4, HiX } from 'react-icons/hi';
 import { motion } from 'framer-motion';
+import { images } from '../assets';
 
 const styles = {
    wrapper: `z-[1] shadow-sm fixed  px-8 h-[70px]  w-screen flex justify-between items-center bg-[#f2f5fa] text-black overflow:hidden `,
@@ -10,15 +11,18 @@ const styles = {
    menuitem: `px-4 py-2 m-1 flex items-center text-lg font-['pix'] text-[1.4rem] cursor-pointer rounded-3xl hover:text-[#6e45c7] text-[#78818e]`,
    sidebaritems: `fixed text-center w-full h-full right-0 top-0  text-[2rem] bg-[#ffffff] font-['pix'] text-[#78818e]`,
    sidebaritemhover: `hover:text-[#6e45c7]`,
-   sidebar: `hover:text-[#6e45c7] visible md:hidden  `,
-   sidebarbg: ``,
+   sidebar: ` visible md:hidden flex  `,
+   oplogo: `max-w-[35px] mr-[35px] `,
+   oplogo2: `max-w-[35px] mr-[35px] hidden md:flex block  `,
+   menubutton: `hover:text-[#6e45c7]`,
+   
 }
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false)
   return (
     <div className={styles.wrapper}>
-       
+      
        <div className={styles.logo}>
             <span className={styles.logospan}>33</span>DEVS
        </div>
@@ -32,13 +36,17 @@ const Navbar = () => {
 
          ))}
       </ul>
+      
+      <a href="https://opensea.io/collection/33-devs-punks"><img className={styles.oplogo2} src={images.oplogo}/></a>
 
-      
-      
 
       <div className={styles.sidebar}>
+      
+      <div className={styles.oplogo}>
+      <a href="https://opensea.io/collection/33-devs-punks"><img  src={images.oplogo}/></a>
+      </div>      
 
-      <HiMenuAlt4  size={35} onClick={() => setToggle(true)} />  
+      <HiMenuAlt4  className={styles.menubutton} size={35} onClick={() => setToggle(true)} />  
 
          {toggle && (      
             <div className={styles.sidebarbg}
@@ -63,7 +71,9 @@ const Navbar = () => {
             </div>
             
           )}
-         
+
+
+
       </div>
 
    

@@ -56,6 +56,7 @@ import tt from './twitter.svg';
 import gh from './github.svg';
 import ln from './linkedin.svg';
 import op from './opensea.png';
+import oplogo from './opensealogo.png';
 import pl from './polygon.png';
 
 
@@ -119,5 +120,6 @@ export default {
    gh,
    ln,
    op,
+   oplogo,
    pl,
  };
