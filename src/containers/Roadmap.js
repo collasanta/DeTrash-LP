@@ -3,7 +3,7 @@ import { images } from '../assets';
 import RoadmapCard from '../cards/RoadmapCard';
 
 const styles = {
-   container: ` space-y-4 py-[50px] flex flex-col justify-center bg-[#edf2f8]`,
+   container: `py-[70px] space-y-4  flex flex-col justify-center bg-[#edf2f8]`,
    header: `font-[minitel] text-[25px] text-center px-[20px] leading-[50px] md:text-[30px]`,
    cardcontainer: `py-[25px] mx-auto md:max-w-[1800px] md:flex flex-row flex-wrap   max-w-screen justify-center `,
    purple: `text-[#6e45c7]`,
@@ -20,7 +20,7 @@ const Roadmap = () => {
   return (
      <>
      
-     <div className={styles.container}>
+     <div className={styles.container} id="ROADMAP">
          
          <div className={styles.header}>ROAD<span className={styles.purple}>MAP</span></div>
      

@@ -6,8 +6,8 @@ import { ethers } from 'ethers'
 import abi from '../assets/abi.json'
 
 const styles = {
-   bg: `bg-[#ffffff] p-10 flex justify-center`,
-   about1: `font-[minitel]  text-[25px] text-center md:text-[30px] pt-[35px]`,
+   bg: `bg-[#ffffff] px-[18px] pt-[40px] flex justify-center`,
+   about1: `font-[minitel]  text-[25px] text-center md:text-[30px] pt-[40px]`,
    purple: `font-[minitel] text-[25px] text-[#6e45c7] md:text-[30px]`,
    container: `px-3 py-3 flex flex-col sm:flex-row justify-center bg-[#f2f5fa] md:max-w-2xl shadow-lg  `,
    div1: ` p-2 sm:w-1/2 flex flex-col justify-center text-center space-y-2`,

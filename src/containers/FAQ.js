@@ -25,7 +25,7 @@ const FAQ = () => {
   return (
      <>
 
-      <div className={styles.container}>
+      <div className={styles.container} id="FAQ">
          <div className={styles.header}> F.A.Q </div>
 
          <div className={styles.faqcontainer}>

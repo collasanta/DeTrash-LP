@@ -2,7 +2,7 @@ import React from 'react'
 import { images } from '../assets';
 
 const styles ={
-   container: `space-y-4 flex flex-col justify-center pb-[40px]`,
+   container: `space-y-4 flex flex-col justify-center pt-[70px] pb-[70px]`,
    about1: `font-[minitel]  text-[20px] text-center px-[20px] leading-[50px] md:text-[30px]`,
    rev: `font-[minitel] text-[25px] text-[#6e45c7] md:text-[30px]`,
    about2: ` font-[minitel] text-[15px] text-center capitalize px-[40px] text-[#7c8591] `,
@@ -11,8 +11,8 @@ const styles ={
 const About = () => {
   return (
      <>
-      <div className={styles.container}>
-         <p className={styles.about1}>
+      <div className={styles.container} id="ABOUT">
+         <p className={styles.about1} >
             JOIN THE DEVS <br/> LEADING THE <br/> <span className={styles.rev}>WEB3 REVOLUTION</span>
          </p>
          <div className={styles.about2}>
