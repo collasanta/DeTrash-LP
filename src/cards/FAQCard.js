@@ -11,7 +11,6 @@ const styles = {
 }
 
 const FAQCard = ({question, setactivefaq, activefaq}) => {
-   console.log(question.questionid)
   return (
    <>
    <div className={styles.supercontainer}>

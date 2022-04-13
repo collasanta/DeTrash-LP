@@ -1,6 +1,9 @@
 import React from 'react'
-import { useState } from 'react';
 import { images } from '../assets';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { ethers } from 'ethers'
+import abi from '../assets/abi.json'
 
 const styles = {
    bg: `bg-[#ffffff] p-10 flex justify-center`,
@@ -9,18 +12,77 @@ const styles = {
    div2: ` p-2 sm:w-1/2 align-middle text-center flex flex-col justify-center space-y-2` ,
    image: ` px-6 py-0 `,
    supply: `font-[pix] text-lg bg-[#ffffff] mx-6`,
-   btnconnect: `font-[pix] animate-pulse text-lg bg-[#6e45c7] hover:bg-[#45c76e] text-white font-bold p-4  shadow-md`,
+   btnconnect: `font-[pix] w-full animate-pulse text-lg bg-[#6e45c7] hover:bg-[#45c76e] text-white font-bold p-4  shadow-md`,
    amount: `font-[pix] text-lg`,
    btnmint: `font-[pix] text-lg bg-[#6e45c7] hover:bg-[#45c76e] text-white font-bold py-4 px-6 shadow-md`,
    counterbtnp: `bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l`,
    counterbtnn: `bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r`,
    counter: `bg-gray-200 text-gray-800 font-bold py-3 px-4`,
    asupply: `text-[30px] text-[#45c76e]`,
+   polygon: `max-w-[130px] mx-auto`,
+   spinner: `w-12 h-12 rounded-full animate-spin border-8 border-solid border-purple-500 border-t-transparent`,
 }
 
+const address = "0xA58E6e03E6584DCcBDbd1Fbf09b8D38122af811a"
+const provider = new ethers.providers.Web3Provider(window.ethereum)
+const contract = new ethers.Contract(address, abi, provider) 
+
 const Minter = () => {
-   const [mintAmount, setmintAmount] = useState(1);
-   const NFTprice = 0.75 ; //MATIC
+   const [mintAmount, setmintAmount] = useState(1)
+   const [metamask, setmetamask] = useState(false)
+   const [walletconnected, setWalletconnected] = useState(false)
+   const [nftcostwei, setnftcostwei] = useState("0")
+   const [nftcosteth, setnftcosteth] = useState("0")
+   const [price, setprice] = useState()
+   const [totalSupply, setTotalsupply] = useState()
+   const [mintingmodal, setmintingmodal] = useState(false)
+   
+   async function loaddata(){
+      const nftcostbg = await contract.cost()
+      const nftcostwei =  await nftcostbg.toString()
+      setnftcostwei (nftcostwei)
+      const nftcostethx = nftcostwei / 1000000000000000000
+      const nftcosteth = nftcostethx.toFixed(4)
+      setnftcosteth (nftcosteth)
+      const totalSupplybn = await contract.totalSupply()
+      const totalSupply = await totalSupplybn.toString()
+      setTotalsupply (totalSupply)
+   } 
+
+   async function connectMetamask () {
+
+      window.ethereum == undefined ? setmetamask(false) : setmetamask(true)
+   }
+   
+   async function connectWallet () {
+      await provider.send("eth_requestAccounts",[])
+      setWalletconnected(true)   
+
+   }
+
+   async function mint() {
+      const signer = await provider.getSigner()  
+      const signedcontract = await contract.connect(signer)
+      const totalprice = nftcostwei * mintAmount
+      const pay = {value: totalprice.toString() }
+      const minting = await signedcontract.mint(mintAmount, pay)
+      setmintingmodal(true)
+      await minting.wait()
+      setmintingmodal(false)
+   }
+
+   useEffect(() => {
+     connectMetamask()   
+     loaddata()
+   }, [])
+   
+   useEffect(() => {
+      const pricecount = mintAmount * nftcosteth
+      const priceformatted = pricecount.toLocaleString("en-US", { maximumFractionDigits: 4, minimumFractionDigits: 1 })
+      setprice(priceformatted)
+      console.log("price",priceformatted)
+    }, [mintAmount, nftcosteth])
+
 
   return (
     <>
@@ -36,38 +98,49 @@ const Minter = () => {
 
                <div className={styles.supply}>
                   <span>SUPPLY: </span>
-                  <span className={styles.asupply}>30</span>/10.000
+                  <span className={styles.asupply}>{totalSupply}</span>/10.000
                </div>
 
             </div>
+            
+            {
+            !mintingmodal 
+            ?
+               <div className={styles.div2}>
+                  <img src={images.pl} alt="" className={styles.polygon}></img>
+                  {metamask ?
 
-            <div className={styles.div2}>
+                     <div className={styles.btndiv} > 
+                        { walletconnected ? "" : <button className={styles.btnconnect} onClick={() => {connectWallet()}}>CONNECT WALLET</button> }
+                     </div>
+                  : "Metamask Extension Not Detected! For minting, please install it and refresh the page."}               
+                                 
+                  {walletconnected ?                
+                     <div className={styles.amount}>
+                        <div>Amount:</div>
+                        <button className={styles.counterbtnp} onClick={() => {mintAmount > 1 ? setmintAmount(mintAmount-1): setmintAmount(mintAmount)}}>-</button>
+                        <span className={styles.counter}>{mintAmount}</span>
+                        <button className={styles.counterbtnn} onClick={() => {mintAmount < 5 ? setmintAmount(mintAmount+1): setmintAmount(mintAmount)}}>+</button>
+                     </div>  
+                  : "" }
 
-
-               <div className={styles.btnconnect}>
-                  <button>CONNECT WALLET</button>
+                  {walletconnected ?  
+                  <div className={styles.supply}>
+                        <span>PRICE: </span>
+                        {console.log("nftcosteth",nftcosteth)}
+                        <span className={styles.asupply}>{mintAmount * nftcosteth == 0 ? "FREE" : price }</span> {mintAmount * nftcosteth == 0 ? "to mint" : "MATIC" }
+                     </div>
+                  : "" }
+                  
+                  {walletconnected ?    
+                     <button className={styles.btnmint} onClick={()=>{mint()}}>MINT</button>
+                  : "" } 
                </div>
-
-                              
-
-
-               <div className={styles.amount}>
-                  <div>Amount:</div>
-                  <button className={styles.counterbtnp} onClick={() => {setmintAmount(mintAmount-1)}}>-</button>
-                  <span className={styles.counter}>{mintAmount}</span>
-                  <button className={styles.counterbtnn} onClick={() => {setmintAmount(mintAmount+1)}}>+</button>
-                </div>
-
-               
-                <div className={styles.supply}>
-                  <span>PRICE: </span>
-                  <span className={styles.asupply}>{mintAmount * NFTprice}</span> MATIC
-               </div>
-
-                  <button className={styles.btnmint}>MINT</button>
+             : 
+               <div class={styles.spinner}> </div> 
+            }
 
 
-            </div>
 
          </div>
       </div>

@@ -8,12 +8,13 @@ const styles = {
    cardcontainer: `flex flex-col justify-center bg-[#ffffff] md:flex-row      `,
    header: `font-[minitel] text-[25px] text-center px-[20px] leading-[50px] md:text-[30px]`,
    purple: `text-[#6e45c7]`,
+   socialiconscontainer:``,
 }
 
 const teamdata = [
-   [{title:"VICTOR COLLASANTA", description:"Full Stack Web3 Developer and 33Web Founder", image: images.p2}],
-   [{title:"MORPHEUS", description:"Advisor on how to scape the Matrix", image: images.p1}],
-   [{title:"NEO", description:"CEO, awakening people from the dream", image: images.p3}],
+   [{title:"VICTOR COLLASANTA", description:"Full Stack Web3 Developer and 33Web Founder", image: images.p2, linkedin:"https://www.linkedin.com/in/victor-collasanta-a4b9a913b/", twitter:'https://twitter.com/0xKabutoDev', github:'https://github.com/collasanta',}],
+   [{title:"MORPHEUS", description:"Business Advisor on how to scape the Matrix", image: images.p1, linkedin:"#team", twitter:'#team', github:'#team',}],
+   [{title:"NEO", description:"CEO, helping awakening people from the dream", image: images.p3, linkedin:"#team", twitter:'#team', github:'#team',}],
 ]
 const Team = () => {
   return (
@@ -23,6 +24,7 @@ const Team = () => {
       </div>
       
       <div className={styles.container2}>
+
          <div className={styles.cardcontainer} >
                {teamdata.map(cardinfo=>(
                   <div>

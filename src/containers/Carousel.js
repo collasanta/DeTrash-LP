@@ -16,6 +16,9 @@ const Carousel = () => {
          <>
          
          <div className={styles.wrapper}>
+            <div className={styles.opensea}>
+               Available on OpenSea
+            </div>
             <div className={styles.imagescontainer}>
 
                {punks.map(punk=>(
