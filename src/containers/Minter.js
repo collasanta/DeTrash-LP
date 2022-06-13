@@ -11,10 +11,10 @@ const styles = {
    green: `font-[corbel] text-[45px] text-[#64B6AC]`,
    grey: `font-[corbel] text-[45px] text-[#323232]`,
    container: `px-3 py-3 flex flex-col w-[360px] md:w-[600px] justify-center bg-[#ebf6ff] shadow-lg  `,
-   div1: ` p-2 flex flex-col justify-center text-center space-y-2`,
-   div2: ` p-2  align-middle text-center flex flex-col justify-center space-y-2` ,
+   div1: `pt-1`,
+   div2: `align-middle mx-auto text-center flex flex-col  space-y-2` ,
    image: ` px-6 py-0 `,
-   input: `font-[corbel] text-lg bg-[#ffffff] mx-6`,
+   input: `font-[corbel] text-lg flex justify-between h-[40px] w-[300px] bg-[#ffffff] rounded-lg px-[50px] border-2 border-grey-600 pt-[3px] mx-6`,
    metamaskerror: `font-[corbel] text-sm bg-[#ffffff] mx-6 capitalize p-1`,
    btnconnect: `font-[corbel] w-full animate-pulse text-lg bg-[#64B6AC] hover:bg-[#5BBAEB] text-white font-bold p-4  shadow-md`,
    amount: `font-[corbel] text-lg`,
@@ -165,14 +165,21 @@ const Minter = () => {
                   : <div className={styles.metamaskerror}>Metamask Extension Not Detected! For minting, please install it and refresh the page </div>}                           
 
                   {walletconnected ?  
-                  <div className={styles.metamaskerror}>
-                        <span> INPUT </span>
-                     </div>
+                    <div className={styles.input}>
+                      <div className={styles.inputbox}>
+                        <input placeholder='1 TOKEN'></input>
+                      </div>
+                      <div className={styles.inputdesc}>
+                        CELO
+                      </div>
+                          
+                    </div>
                   : "" }
                   
                   {walletconnected ?  
-                  <div className={styles.metamaskerror}>
-                        <span>OUTPUT </span>
+                  
+                  <div className={styles.output}>
+                        RECY: <span>OUTPUT </span>
                      </div>
                   : "" }
 
