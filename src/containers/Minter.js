@@ -48,6 +48,8 @@ const Minter = () => {
    const [price, setprice] = useState()
    const [totalSold, setTotalsold] = useState()
    const [mintingmodal, setmintingmodal] = useState(false)
+   const [dataloaded, setDataloaded] = useState(false)
+  //  const [chainIdbg, setChainidbg] = useState()
    
    window.onload = function () {
 
@@ -98,7 +100,6 @@ const Minter = () => {
         }
       ]
     })
-    connectWallet()
    }
 
    const  handleInputChange = async (event) => {
@@ -108,32 +109,35 @@ const Minter = () => {
 
    async function connectWallet () {
     const chainIdbg = await window.ethereum.chainId
-    console.log("chainIdbg",chainIdbg)
-    console.log("metamaskprovider",metamaskprovider)
+    console.log("window.ethereum chainIdbg connectwallet",chainIdbg)
+    console.log("metamaskprovider connectwallet",metamaskprovider)
+    console.log("networks.celo.chainId connectwallet",networks.celo.chainId)
 
     if (chainIdbg !== networks.celo.chainId) {
-      changeNetwork()
-      //  window.alert("MetaMask is connect to wrong network! To Mint, Please First Connect your MetaMask to Celo Mainnet Network (ID:4220) before minting")
-       // setWalletconnected(false)
+      await changeNetwork()
+        const provider = new ethers.providers.Web3Provider(window.ethereum)
+        setMetamaskprovider(provider)
+        await provider.send("eth_requestAccounts",[])
+        setWalletconnected(true)
     } else {
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       setMetamaskprovider(provider)
       await provider.send("eth_requestAccounts",[])
-      setWalletconnected(true)  
+      setWalletconnected(true)
+
+         
+
     }
  
    }
 
    async function buy() {
-      const chainIdbg = await window.ethereum.chainId
-      console.log("chainIdbg",chainIdbg)
-      console.log("metamaskprovider",metamaskprovider)
+    const chainIdbg = await window.ethereum.chainId
+      console.log("buy chainIdbg",chainIdbg)
+      console.log("buy metamaskprovider",metamaskprovider)
 
       if (chainIdbg !== networks.celo.chainId) {
         await changeNetwork()
-        
-        //  window.alert("MetaMask is connect to wrong network! To Mint, Please First Connect your MetaMask to Celo Mainnet Network (ID:4220) before minting")
-         // setWalletconnected(false)
       } else {
       const signer = await metamaskprovider.getSigner()  
       const signedcontract = await contract.connect(signer)
@@ -156,6 +160,7 @@ const Minter = () => {
          const nftcostethx = await nftcostwei / 1000000000000000000
          const nftcosteth = await nftcostethx.toFixed(4)
          setnftcosteth (nftcosteth)
+         setDataloaded(true)
       } 
       loaddata()
    }, [])
@@ -181,14 +186,14 @@ const Minter = () => {
             !mintingmodal 
             ?
                <div className={styles.div2}>
-                  {metamask ?
+                  {metamask & dataloaded ?
 
                      <div className={styles.btndiv} > 
                         { walletconnected ? "" :
                            <button className={styles.btnconnect} onClick={() => {connectWallet()}}>CONECTAR CARTEIRA</button>    
                         }
                      </div>
-                  : <div className={styles.metamaskerror}>Metamask Extension Not Detected! For minting, please install it and refresh the page </div>}                           
+                  : <div className={styles.spinner}> </div> }                           
 
                   {walletconnected ?  
                     <div className={styles.input}>
@@ -226,10 +231,15 @@ const Minter = () => {
                </div> 
             }
 
-            <div className={styles.price}>
-              1 Token RECY = 
-              <span className={styles.asupply}>{(1/nftcosteth).toFixed(4)}</span> Celo
-            </div>
+            { dataloaded ? 
+              <div className={styles.price}>
+                1 Token RECY = 
+                <span className={styles.asupply}>{(1/nftcosteth).toFixed(4)}</span> Celo
+              </div> 
+            :
+            ""
+            }
+
 
          </div>
          
