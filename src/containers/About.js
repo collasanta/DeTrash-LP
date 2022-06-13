@@ -5,7 +5,7 @@ const styles ={
    container: `space-y-4 flex flex-col justify-center pt-[70px] pb-[70px]`,
    about1: `font-[corbel]  text-[30px] text-center px-[20px] leading-[50px]`,
    rev: `font-[corbel] text-[30px] text-[#64b6ac]`,
-   about2: ` font-[corbel] text-[25px] text-center capitalize px-[40px] text-[#7c8591] `,
+   about2: ` font-[corbel] text-[25px] text-center px-[40px] text-[#7c8591] `,
 }
 
 const About = () => {
@@ -13,10 +13,11 @@ const About = () => {
      <>
       <div className={styles.container} id="SOBRE">
          <p className={styles.about1} >
-            DESCRIÇÃO DO <span className={styles.rev}> PROJETO </span>
+            TOKENS QUE LIMPAM O <span className={styles.rev}> MUNDO </span>
          </p>
          <div className={styles.about2}>
-         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et 
+         Começamos com o primeiro token para limpar os oceanos, o RECY. Mas queremos ir muito além para transformar como podemos manter todo o planeta limpo de forma descentralizada, mais transparente e mais eficiente.
+
          </div>
       </div>
      </>

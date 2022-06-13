@@ -7,7 +7,7 @@ import abi from '../assets/VENDOR.json'
 
 const styles = {
    bg: `bg-[#ffffff] px-[18px] pt-[40px] flex justify-center`,
-   about1: `font-[corbel]  text-[25px] text-center md:text-[30px] pt-[80px]`,
+   about1: `font-[corbel]  text-[25px] text-center md:text-[30px] pt-[100px]`,
    green: `font-[corbel] text-[45px] text-[#64B6AC]`,
    grey: `font-[corbel] text-[45px] text-[#323232]`,
    container: `px-3 py-3 flex flex-col w-[360px] md:w-[600px] justify-center bg-[#ebf6ff] shadow-lg  `,
@@ -188,8 +188,8 @@ const Minter = () => {
             }
 
             <div className={styles.price}>
-              1 Token = 
-              <span className={styles.asupply}>{(1/nftcosteth).toFixed(5)}</span> Celo
+              1 Token RECY = 
+              <span className={styles.asupply}>{(1/nftcosteth).toFixed(4)}</span> Celo
             </div>
 
          </div>
