@@ -3,20 +3,20 @@ import { images } from '../assets';
 
 const styles ={
    container: `space-y-4 flex flex-col justify-center pt-[70px] pb-[70px]`,
-   about1: `font-[minitel]  text-[20px] text-center px-[20px] leading-[50px] md:text-[30px]`,
-   rev: `font-[minitel] text-[25px] text-[#6e45c7] md:text-[30px]`,
-   about2: ` font-[minitel] text-[15px] text-center capitalize px-[40px] text-[#7c8591] `,
+   about1: `font-[corbel]  text-[30px] text-center px-[20px] leading-[50px]`,
+   rev: `font-[corbel] text-[30px] text-[#64b6ac]`,
+   about2: ` font-[corbel] text-[25px] text-center capitalize px-[40px] text-[#7c8591] `,
 }
 
 const About = () => {
   return (
      <>
-      <div className={styles.container} id="ABOUT">
+      <div className={styles.container} id="SOBRE">
          <p className={styles.about1} >
-            JOIN THE DEVS <br/> LEADING THE <br/> <span className={styles.rev}>WEB3 REVOLUTION</span>
+            DESCRIÇÃO DO <span className={styles.rev}> PROJETO </span>
          </p>
          <div className={styles.about2}>
-            We are the union of 10.000 punk developers working on developing disruptive solutions to advance humanity 
+         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et 
          </div>
       </div>
      </>

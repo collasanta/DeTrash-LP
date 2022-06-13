@@ -4,17 +4,18 @@ import { motion } from 'framer-motion';
 import { images } from '../assets';
 
 const styles = {
-   wrapper: `z-[1] shadow-sm fixed  px-8 h-[70px]  w-screen flex justify-between items-center bg-[#f2f5fa] text-black overflow:hidden `,
-   logo: `flex w-1/8 items-center justify-start font-['pix'] text-[2rem] text-[#78818e]  `,
+   wrapper: `z-[1] shadow-sm fixed  px-8 h-[70px]  w-screen flex justify-between items-center bg-[#ebf6ff] text-black overflow:hidden `,
+   logo: `flex w-1/8 items-center justify-start font-['corbel'] text-[2rem] text-[#78818e]  `,
    logospan: `text-[#6e45c7]`,
    menu: `hidden md:flex block `,
-   menuitem: `px-4 py-2 m-1 flex items-center text-lg font-['pix'] text-[1.4rem] cursor-pointer rounded-3xl hover:text-[#6e45c7] text-[#78818e]`,
-   sidebaritems: `fixed text-center w-full h-full right-0 top-0  text-[2rem] bg-[#ffffff] font-['pix'] text-[#78818e]`,
-   sidebaritemhover: `hover:text-[#6e45c7]`,
+   menuitem: `px-4 py-2 m-1 flex items-center text-lg font-['corbel'] text-[1.4rem] cursor-pointer rounded-3xl hover:text-[#64b6ac] text-[#78818e]`,
+   sidebaritems: `fixed text-center w-full h-full right-0 top-0  text-[2rem] bg-[#ffffff] font-['corbel'] text-[#78818e]`,
+   sidebaritemhover: `hover:text-[#64b6ac]`,
    sidebar: ` visible md:hidden flex  `,
    oplogo: `max-w-[35px] mr-[35px] `,
    oplogo2: `max-w-[35px] mr-[35px] hidden md:flex block  `,
-   menubutton: `hover:text-[#6e45c7]`,
+   menubutton: `hover:text-[#64b6ac]`,
+   dtlogo: `max-w-[100px] mr-[35px]`,
    
 }
 
@@ -24,11 +25,11 @@ const Navbar = () => {
     <div className={styles.wrapper}>
       
        <div className={styles.logo}>
-            <span className={styles.logospan}>33</span>DEVS
+          <img className={styles.dtlogo} src={images.dtlogo}/>
        </div>
 
        <ul className={styles.menu}>
-         {['ABOUT','TRAITS', 'ROADMAP', 'TEAM', 'FAQ' ].map((item)=> (
+         {['SOBRE', 'ROADMAP', 'EQUIPE', 'FAQ' ].map((item)=> (
             <li className={styles.menuitem} key={`link-${item}`}>
                <div />
                <a href={`#${item}`}>{item}</a>
@@ -37,15 +38,11 @@ const Navbar = () => {
          ))}
       </ul>
       
-      <a href="https://opensea.io/collection/33-devs-punks"><img className={styles.oplogo2} src={images.oplogo}/></a>
+
 
 
       <div className={styles.sidebar}>
       
-      <div className={styles.oplogo}>
-      <a href="https://opensea.io/collection/33-devs-punks"><img  src={images.oplogo}/></a>
-      </div>      
-
       <HiMenuAlt4  className={styles.menubutton} size={35} onClick={() => setToggle(true)} />  
 
          {toggle && (      
@@ -57,8 +54,8 @@ const Navbar = () => {
             whileInView={{ x: [300, 0] }}
             transition={{ duration: 0.85, ease: 'easeOut' }}
           >
-               <HiX size={35} color='#6e45c7' onClick={() => setToggle(false)} />       
-               {['ABOUT','TRAITS', 'ROADMAP', 'TEAM', 'FAQ'].map((item) => (
+               <HiX size={35} color='#64b6ac' onClick={() => setToggle(false)} />       
+               {['SOBRE', 'ROADMAP', 'EQUIPE', 'FAQ'].map((item) => (
                <li className={styles.sidebaritemhover} key={item}>
                   <a href={`#${item}`} onClick={() => setToggle(false)}>
                      {item}

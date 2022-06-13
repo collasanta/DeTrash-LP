@@ -10,10 +10,10 @@ const TeamCard = ({cardinfo}) => {
       container: ` p-3 m-3 md:min-w-[300px]  flex flex-row md: justify-center md:flex-col mx-auto  `,
       container2: `flex flex-col md:mx-auto md:space-y-[-20px] justify-end `,
       image: ` min-w-[150px] max-w-[150px] min-h-[120px] md:max-w-[220px]  md:mx-auto md:mb-[20px]  `,
-      titlebox: `z-0 hover:bg-[#bcbae5] bg-[#6e45c7] shadow-md w-[220px]  md:w-[280px] h-[45px] md:max-w-[280px] md:h-[60px]  py-[5px]  rounded-r-full `,
-      title: ` ml-[10px] font-[pix] text-white md:text-[25px] text-[20px] ml-[10px]   `,
+      titlebox: `z-0 hover:bg-[#5BBAEB] bg-[#64B6AC] shadow-md w-[220px]  md:w-[280px] h-[45px] md:max-w-[280px] md:h-[60px]  py-[5px]  rounded-r-full `,
+      title: ` ml-[10px] font-[corbel] text-white md:text-[25px] text-[20px] ml-[10px]   `,
       descbox: `flex flex-col justify-end z-1 bg-[#f1f1f1] p-2 max-w-[280px] min-w-[120px] max-h-[94px] md:max-h-[120px] md:h-[120px] md:h-[120px] mx-[10px] pt-[30px] md:pt-[40px] mx-0 md:mx-auto pb-[10px] rounded-r-full  `,
-      desc: ` font-[minitel] md:text-[14px] text-[12px] ml-[5px]  `,
+      desc: ` font-[corbel] md:text-[18px] text-[12px] ml-[5px]  `,
       icons: `fill-[#ffffff]`,
       socialiconscontainer: `mx-1 flex p-1 space-x-[10px] `,
 

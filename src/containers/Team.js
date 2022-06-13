@@ -6,8 +6,8 @@ const styles = {
    container: `space-y-4 pt-[70px] pb-[30px] flex flex-col justify-center bg-[#ffffff]   `,
    container2: `space-y-4 flex flex-col md:flex-row justify-center bg-[#ffffff] pb-[70px]`,
    cardcontainer: `flex flex-col justify-center bg-[#ffffff] md:flex-row      `,
-   header: `font-[minitel] text-[25px] text-center px-[20px] md:text-[30px]`,
-   purple: `text-[#6e45c7]`,
+   header: `font-[corbel] text-[45px] text-center px-[20px]`,
+   purple: `text-[#5bbaeb]`,
    socialiconscontainer:``,
 }
 
@@ -19,8 +19,8 @@ const teamdata = [
 const Team = () => {
   return (
      <>
-      <div className={styles.container} id="TEAM" >
-         <div className={styles.header} > THE<span className={styles.purple}>TEAM</span> </div>
+      <div className={styles.container} id="EQUIPE" >
+         <div className={styles.header} > A <span className={styles.purple}>EQUIPE</span> </div>
       </div>
       
       <div className={styles.container2}>

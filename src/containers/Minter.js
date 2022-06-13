@@ -7,17 +7,18 @@ import abi from '../assets/abi.json'
 
 const styles = {
    bg: `bg-[#ffffff] px-[18px] pt-[40px] flex justify-center`,
-   about1: `font-[minitel]  text-[25px] text-center md:text-[30px] pt-[40px]`,
-   purple: `font-[minitel] text-[25px] text-[#6e45c7] md:text-[30px]`,
-   container: `px-3 py-3 flex flex-col sm:flex-row justify-center bg-[#f2f5fa] md:max-w-2xl shadow-lg  `,
-   div1: ` p-2 sm:w-1/2 flex flex-col justify-center text-center space-y-2`,
-   div2: ` p-2 sm:w-1/2 align-middle text-center flex flex-col justify-center space-y-2` ,
+   about1: `font-[corbel]  text-[25px] text-center md:text-[30px] pt-[80px]`,
+   green: `font-[corbel] text-[45px] text-[#64B6AC]`,
+   grey: `font-[corbel] text-[45px] text-[#323232]`,
+   container: `px-3 py-3 flex flex-col w-[360px] md:w-[600px] justify-center bg-[#ebf6ff] shadow-lg  `,
+   div1: ` p-2 flex flex-col justify-center text-center space-y-2`,
+   div2: ` p-2  align-middle text-center flex flex-col justify-center space-y-2` ,
    image: ` px-6 py-0 `,
-   supply: `font-[pix] text-lg bg-[#ffffff] mx-6`,
-   metamaskerror: `font-[minitel] text-sm bg-[#ffffff] mx-6 capitalize p-1`,
-   btnconnect: `font-[pix] w-full animate-pulse text-lg bg-[#6e45c7] hover:bg-[#45c76e] text-white font-bold p-4  shadow-md`,
-   amount: `font-[pix] text-lg`,
-   btnmint: `font-[pix] text-lg bg-[#6e45c7] hover:bg-[#45c76e] text-white font-bold py-4 px-6 shadow-md`,
+   input: `font-[corbel] text-lg bg-[#ffffff] mx-6`,
+   metamaskerror: `font-[corbel] text-sm bg-[#ffffff] mx-6 capitalize p-1`,
+   btnconnect: `font-[corbel] w-full animate-pulse text-lg bg-[#64B6AC] hover:bg-[#5BBAEB] text-white font-bold p-4  shadow-md`,
+   amount: `font-[corbel] text-lg`,
+   btnmint: `font-[corbel] text-lg bg-[#64B6AC] hover:bg-[#5BBAEB] text-white font-bold py-4 mx-6 shadow-md`,
    counterbtnp: `bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l`,
    counterbtnn: `bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r`,
    counter: `bg-gray-200 text-gray-800 font-bold py-3 px-4`,
@@ -38,7 +39,7 @@ const contract =  new ethers.Contract(address, abi, rpcurlprovider)
 const Minter = () => {
    const [mintAmount, setmintAmount] = useState(1)
    const [metamask, setmetamask] = useState(false)
-   const [walletconnected, setWalletconnected] = useState(false)
+   const [walletconnected, setWalletconnected] = useState()
    const [metamaskprovider, setMetamaskprovider] = useState([])
    const [nftcostwei, setnftcostwei] = useState("0")
    const [nftcosteth, setnftcosteth] = useState("0")
@@ -130,22 +131,15 @@ const Minter = () => {
   return (
     <>
          <div className={styles.about1}>
-            <span className={styles.purple}>MINT</span> OPEN
+            <span className={styles.green}>COMPRAR </span> <span className={styles.grey}>TOKEN </span> 
          </div>
       <div className={styles.bg}>
 
          <div className={styles.container}>
 
             <div className={styles.div1}>
+               <img src={images.pl} alt="" className={styles.polygon}></img>
 
-               <div className={styles.image}>
-                  <img  src={images.phidden} alt=""/>
-               </div>
-
-               <div className={styles.supply}>
-                  <span>SUPPLY: </span>
-                  <span className={styles.asupply}>{totalSupply}</span>/10.000
-               </div>
 
             </div>
             
@@ -153,36 +147,29 @@ const Minter = () => {
             !mintingmodal 
             ?
                <div className={styles.div2}>
-                  <img src={images.pl} alt="" className={styles.polygon}></img>
                   {metamask ?
 
                      <div className={styles.btndiv} > 
                         { walletconnected ? "" :
-                           <button className={styles.btnconnect} onClick={() => {connectWallet()}}>CONNECT WALLET</button>    
-                        }
-                        { walletconnected ? "" :
-                           <a href="https://opensea.io/collection/33-devs-punks" target="_blank"><img className={styles.opensea}src={images.op}></img></a>
+                           <button className={styles.btnconnect} onClick={() => {connectWallet()}}>CONECTAR CARTEIRA</button>    
                         }
                      </div>
                   : <div className={styles.metamaskerror}>Metamask Extension Not Detected! For minting, please install it and refresh the page </div>}                           
-                  {walletconnected ?                
-                     <div className={styles.amount}>
-                        <div>Amount:</div>
-                        <button className={styles.counterbtnp} onClick={() => {mintAmount > 1 ? setmintAmount(mintAmount-1): setmintAmount(mintAmount)}}>-</button>
-                        <span className={styles.counter}>{mintAmount}</span>
-                        <button className={styles.counterbtnn} onClick={() => {mintAmount < 5 ? setmintAmount(mintAmount+1): setmintAmount(mintAmount)}}>+</button>
-                     </div>  
-                  : "" }
 
                   {walletconnected ?  
-                  <div className={styles.supply}>
-                        <span>PRICE: </span>
-                        <span className={styles.asupply}>{mintAmount * nftcosteth == 0 ? "FREE" : price }</span> {mintAmount * nftcosteth == 0 ? "to mint" : "MATIC" }
+                  <div className={styles.metamaskerror}>
+                        <span> INPUT </span>
                      </div>
                   : "" }
                   
+                  {walletconnected ?  
+                  <div className={styles.metamaskerror}>
+                        <span>OUTPUT </span>
+                     </div>
+                  : "" }
+
                   {walletconnected ?    
-                     <button className={styles.btnmint} onClick={()=>{mint()}}>MINT</button>
+                     <button className={styles.btnmint} onClick={()=>{mint()}}>COMPRAR</button>
                   : "" } 
                </div>
              : 

@@ -58,10 +58,12 @@ import ln from './linkedin.svg';
 import op from './opensea.png';
 import oplogo from './opensealogo.png';
 import pl from './polygon.png';
+import dtlogo from './detrashlogo.png';
 
 
 
 export default {
+   dtlogo,
    p1,
    p2,
    p3,

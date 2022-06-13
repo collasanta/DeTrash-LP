@@ -5,10 +5,8 @@ export default function App() {
   return (
     <>
        <Navbar/>
-       <Carousel/>
        <Minter />
        <About />
-       <Traits />
        <Roadmap />
        <Team />
        <FAQ />
