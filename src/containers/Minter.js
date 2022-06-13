@@ -10,13 +10,14 @@ const styles = {
    about1: `font-[corbel]  text-[25px] text-center md:text-[30px] pt-[100px]`,
    green: `font-[corbel] text-[45px] text-[#64B6AC]`,
    grey: `font-[corbel] text-[45px] text-[#323232]`,
-   container: `px-3 py-3 flex flex-col w-[360px] md:w-[600px] justify-center bg-[#ebf6ff] shadow-lg  `,
-   div1: `pt-1`,
-   div2: `align-middle mx-auto text-center flex flex-col  space-y-2` ,
-   image: ` px-6 py-0 `,
-   input: `font-[corbel] text-lg flex justify-between h-[40px] w-[300px] bg-[#ffffff] rounded-lg px-[50px] border-2 border-grey-600 pt-[3px] mx-6`,
+   container: ` py-3 flex flex-col w-[360px] md:w-[600px] justify-center bg-[#ebf6ff] shadow-lg  `,
+   div1: `py-3`,
+   div2: ` mx-auto  w-[360px] text-center flex flex-col space-y-2 ` ,
+   input: `font-[corbel] text-[22px] flex justify-between  h-[40px]  bg-[#ffffff] rounded-lg px-[10px] border-2 border-grey-300  mx-6`,
+   outputbox: `font-[corbel] ml-[10px] text-[22px] text-[#5BBAEB]`,
+   inputbox: `font-[corbel] ml-[10px] text-[22px]`,
    metamaskerror: `font-[corbel] text-sm bg-[#ffffff] mx-6 capitalize p-1`,
-   btnconnect: `font-[corbel] w-full animate-pulse text-lg bg-[#64B6AC] hover:bg-[#5BBAEB] text-white font-bold p-4  shadow-md`,
+   btnconnect: `font-[corbel] animate-pulse text-lg bg-[#64B6AC] hover:bg-[#5BBAEB] text-white font-bold p-4 px-[60px]  shadow-md`,
    amount: `font-[corbel] text-lg`,
    btnmint: `font-[corbel] text-lg bg-[#64B6AC] hover:bg-[#5BBAEB] text-white font-bold py-4 mx-6 shadow-md`,
    counterbtnp: `bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l`,
@@ -38,9 +39,9 @@ const contract =  new ethers.Contract(address, abi, rpcurlprovider)
 
 
 const Minter = () => {
-   const [mintAmount, setmintAmount] = useState(1)
+   const [buyAmount, setBuyAmount] = useState(1)
    const [metamask, setmetamask] = useState(false)
-   const [walletconnected, setWalletconnected] = useState()
+   const [walletconnected, setWalletconnected] = useState(false)
    const [metamaskprovider, setMetamaskprovider] = useState([])
    const [nftcostwei, setnftcostwei] = useState("0")
    const [nftcosteth, setnftcosteth] = useState("0")
@@ -74,30 +75,73 @@ const Minter = () => {
 
    }
 
+   const networks = {
+    celo: {
+      chainId: `0x${Number(42220).toString(16)}`,
+      chainName: "Celo Mainnet",
+      nativeCurrency :{
+        name:"CELO",
+        symbol:"CELO",
+        decimals:18 
+      },
+        rpcUrls: ["https://forno.celo.org"],
+        blockExplorerUrls: ["https://explorer.celo.org"]
+    }
+   }
+
+   const changeNetwork = async () => {
+    await window.ethereum.request({
+      method: "wallet_addEthereumChain",
+      params: [
+        {
+          ...networks.celo
+        }
+      ]
+    })
+    connectWallet()
+   }
+
+   const  handleInputChange = async (event) => {
+      setBuyAmount(event.target.value)
+      console.log("buyamount", buyAmount)
+   }
 
    async function connectWallet () {
+    const chainIdbg = await window.ethereum.chainId
+    console.log("chainIdbg",chainIdbg)
+    console.log("metamaskprovider",metamaskprovider)
+
+    if (chainIdbg !== networks.celo.chainId) {
+      changeNetwork()
+      //  window.alert("MetaMask is connect to wrong network! To Mint, Please First Connect your MetaMask to Celo Mainnet Network (ID:4220) before minting")
+       // setWalletconnected(false)
+    } else {
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       setMetamaskprovider(provider)
       await provider.send("eth_requestAccounts",[])
-      setWalletconnected(true)   
+      setWalletconnected(true)  
+    }
+ 
    }
 
-   async function mint() {
+   async function buy() {
       const chainIdbg = await window.ethereum.chainId
       console.log("chainIdbg",chainIdbg)
       console.log("metamaskprovider",metamaskprovider)
 
-      if (chainIdbg !== "0x89") {
-         window.alert("MetaMask is connect to wrong network! To Mint, Please First Connect your MetaMask to Polygon Mainnet Network (ID:137) before minting")
+      if (chainIdbg !== networks.celo.chainId) {
+        await changeNetwork()
+        
+        //  window.alert("MetaMask is connect to wrong network! To Mint, Please First Connect your MetaMask to Celo Mainnet Network (ID:4220) before minting")
          // setWalletconnected(false)
       } else {
       const signer = await metamaskprovider.getSigner()  
       const signedcontract = await contract.connect(signer)
-      const totalprice = nftcostwei * mintAmount
-      const pay = {value: totalprice.toString() }
-      const minting = await signedcontract.mint(mintAmount, pay)
+      const pay = {value: (ethers.utils.parseEther(buyAmount.toString())).toString()}
+      console.log("pay", pay) 
+      const buytx = await signedcontract.BuyTokens(pay)
       setmintingmodal(true)
-      await minting.wait()
+      await buytx.wait()
       setmintingmodal(false)
       }
    }
@@ -105,7 +149,6 @@ const Minter = () => {
    useEffect(() => {
       const rpcurlprovider =  new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/celo")
       const contract =  new ethers.Contract(address, abi, rpcurlprovider) 
-
       async function loaddata(){
          const nftcostbg = await contract.TokensperCelo()
          const nftcostwei =  await nftcostbg.toString()
@@ -113,23 +156,10 @@ const Minter = () => {
          const nftcostethx = await nftcostwei / 1000000000000000000
          const nftcosteth = await nftcostethx.toFixed(4)
          setnftcosteth (nftcosteth)
-         console.log(nftcosteth)
-         const totalSoldbn = await contract.totalSold()
-         const totalSold = await totalSoldbn.toString()
-         setTotalsold(totalSold)
-         console.log(totalSold)
       } 
-   
       loaddata()
-
    }, [])
    
-   useEffect(() => {
-      const pricecount = mintAmount * nftcosteth
-      const priceformatted = pricecount.toLocaleString("en-US", { maximumFractionDigits: 4, minimumFractionDigits: 1 })
-      setprice(priceformatted)
-    }, [mintAmount, nftcosteth])
-
 
   return (
     <>
@@ -144,10 +174,6 @@ const Minter = () => {
                <img src={images.pl} alt="" className={styles.polygon}></img>
             </div>
             
-            <div className={styles.price}>
-              <span>Vendido: </span>
-              <span className={styles.asupply}>{totalSold}</span>/1.000.000
-            </div>
 
 
 
@@ -167,7 +193,7 @@ const Minter = () => {
                   {walletconnected ?  
                     <div className={styles.input}>
                       <div className={styles.inputbox}>
-                        <input placeholder='1 TOKEN'></input>
+                        <input placeholder='1 TOKEN' onChange={handleInputChange}></input>
                       </div>
                       <div className={styles.inputdesc}>
                         CELO
@@ -178,13 +204,19 @@ const Minter = () => {
                   
                   {walletconnected ?  
                   
-                  <div className={styles.output}>
-                        RECY: <span>OUTPUT </span>
-                     </div>
+                    <div className={styles.input}>
+                      <div className={styles.outputbox}>
+                      {(buyAmount * 1/nftcosteth).toFixed(4)}
+                      </div>
+                      <div className={styles.inputdesc}>
+                        RECY
+                      </div>
+                     
+                    </div>
                   : "" }
 
                   {walletconnected ?    
-                     <button className={styles.btnmint} onClick={()=>{setmintingmodal(true)}}>COMPRAR</button>
+                     <button className={styles.btnmint} onClick={()=>{buy()}}>COMPRAR</button>
                   : "" } 
                </div>
              : 
