@@ -3,7 +3,7 @@ import { images } from '../assets';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { ethers } from 'ethers'
-import abi from '../assets/abi.json'
+import abi from '../assets/VENDOR.json'
 
 const styles = {
    bg: `bg-[#ffffff] px-[18px] pt-[40px] flex justify-center`,
@@ -22,17 +22,18 @@ const styles = {
    counterbtnp: `bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l`,
    counterbtnn: `bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r`,
    counter: `bg-gray-200 text-gray-800 font-bold py-3 px-4`,
-   asupply: `text-[30px] text-[#45c76e]`,
+   asupply: ` text-[30px] text-center text-[#45c76e]`,
    polygon: `max-w-[130px] mx-auto`,
    modal: `mx-auto`,
    spinner: `mx-auto m-[20px] w-20 h-20 rounded-full animate-spin border-8 border-solid border-blue-300 border-t-transparent`,
    opensea: `max-w-[260px] mx-auto pt-[20px]`,
+   price: ` text-center mx-6 font-[corbel] text-[22px]`,
 
 }
 
 
-const address = "0xA58E6e03E6584DCcBDbd1Fbf09b8D38122af811a"
-const rpcurlprovider =  new ethers.providers.JsonRpcProvider(["https://polygon-rpc.com/"])
+const address = "0x6FF99dD8E23BbfB9340Aa6eE8878917229505537"
+const rpcurlprovider =  new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/celo")
 const contract =  new ethers.Contract(address, abi, rpcurlprovider) 
 
 
@@ -44,7 +45,7 @@ const Minter = () => {
    const [nftcostwei, setnftcostwei] = useState("0")
    const [nftcosteth, setnftcosteth] = useState("0")
    const [price, setprice] = useState()
-   const [totalSupply, setTotalsupply] = useState()
+   const [totalSold, setTotalsold] = useState()
    const [mintingmodal, setmintingmodal] = useState(false)
    
    window.onload = function () {
@@ -102,19 +103,21 @@ const Minter = () => {
    }
 
    useEffect(() => {
-      const rpcurlprovider =  new ethers.providers.JsonRpcProvider("https://polygon-rpc.com/")
+      const rpcurlprovider =  new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/celo")
       const contract =  new ethers.Contract(address, abi, rpcurlprovider) 
 
       async function loaddata(){
-         const nftcostbg = await contract.cost()
+         const nftcostbg = await contract.TokensperCelo()
          const nftcostwei =  await nftcostbg.toString()
          setnftcostwei (nftcostwei)
          const nftcostethx = await nftcostwei / 1000000000000000000
          const nftcosteth = await nftcostethx.toFixed(4)
          setnftcosteth (nftcosteth)
-         const totalSupplybn = await contract.totalSupply()
-         const totalSupply = await totalSupplybn.toString()
-         setTotalsupply (totalSupply)
+         console.log(nftcosteth)
+         const totalSoldbn = await contract.totalSold()
+         const totalSold = await totalSoldbn.toString()
+         setTotalsold(totalSold)
+         console.log(totalSold)
       } 
    
       loaddata()
@@ -139,10 +142,15 @@ const Minter = () => {
 
             <div className={styles.div1}>
                <img src={images.pl} alt="" className={styles.polygon}></img>
-
-
             </div>
             
+            <div className={styles.price}>
+              <span>Vendido: </span>
+              <span className={styles.asupply}>{totalSold}</span>/1.000.000
+            </div>
+
+
+
             {
             !mintingmodal 
             ?
@@ -178,7 +186,14 @@ const Minter = () => {
                   <span className={styles.supply}>TRANSACTION IN PROCESS</span>
                </div> 
             }
+
+            <div className={styles.price}>
+              1 Token = 
+              <span className={styles.asupply}>{(1/nftcosteth).toFixed(5)}</span> Celo
+            </div>
+
          </div>
+         
       </div>
 
     </>
