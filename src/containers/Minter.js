@@ -25,7 +25,7 @@ const styles = {
    asupply: `text-[30px] text-[#45c76e]`,
    polygon: `max-w-[130px] mx-auto`,
    modal: `mx-auto`,
-   spinner: `mx-auto mt-[100px] w-20 h-20 rounded-full animate-spin border-8 border-solid border-purple-500 border-t-transparent`,
+   spinner: `mx-auto mt-[100px] w-20 h-20 rounded-full animate-spin border-8 border-solid border-blue-300 border-t-transparent`,
    opensea: `max-w-[260px] mx-auto pt-[20px]`,
 
 }
@@ -169,7 +169,7 @@ const Minter = () => {
                   : "" }
 
                   {walletconnected ?    
-                     <button className={styles.btnmint} onClick={()=>{mint()}}>COMPRAR</button>
+                     <button className={styles.btnmint} onClick={()=>{setmintingmodal(true)}}>COMPRAR</button>
                   : "" } 
                </div>
              : 
