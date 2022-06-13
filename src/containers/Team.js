@@ -5,16 +5,16 @@ import TeamCard from '../cards/TeamCard';
 const styles = {
    container: `space-y-4 pt-[70px] pb-[30px] flex flex-col justify-center bg-[#ffffff]   `,
    container2: `space-y-4 flex flex-col md:flex-row justify-center bg-[#ffffff] pb-[70px]`,
-   cardcontainer: `flex flex-col justify-center bg-[#ffffff] md:flex-row      `,
+   cardcontainer: `flex flex-col justify-center bg-[#ffffff] md:flex-row     `,
    header: `font-[corbel] text-[45px] text-center px-[20px]`,
    purple: `text-[#5bbaeb]`,
    socialiconscontainer:``,
 }
 
 const teamdata = [
-   [{title:"VICTOR COLLASANTA", description:"Full Stack Web3 Developer and 33Web Founder", image: images.p2, linkedin:"https://www.linkedin.com/in/victor-collasanta-a4b9a913b/", twitter:'https://twitter.com/0xKabutoDev', github:'https://github.com/collasanta',}],
-   [{title:"MORPHEUS", description:"Business Advisor on how to scape the Matrix", image: images.p1, linkedin:"#team", twitter:'#team', github:'#team',}],
-   [{title:"NEO", description:"CEO, helping awakening people from the dream", image: images.p3, linkedin:"#team", twitter:'#team', github:'#team',}],
+   [{title:"Beatriz Siqueira", description:"Fundadora e Desenvolvedora e responsável por decidir e executar o planejamento de desenvolvimento e gestão do nosso time de desenvolvimento", image: images.p2, linkedin:"https://www.linkedin.com/in/victor-collasanta-a4b9a913b/", twitter:'https://twitter.com/0xKabutoDev', github:'https://github.com/collasanta',}],
+   [{title:"Philipp Teles", description:"Empreendedor com carreira em startups de crescimento acelerado, criou a DeTrash e o modelo de negócio do RECY para limpar os oceanos.", image: images.p1, linkedin:"#team", twitter:'#team', github:'#team',}],
+   [{title:"Matheus Rocha", description:"Matheus é o COO e busca sempre melhorar os processos, atua no planejamento estratégico e impulsionar as vendas dos cripto ativos", image: images.p3, linkedin:"#team", twitter:'#team', github:'#team',}],
 ]
 const Team = () => {
   return (
