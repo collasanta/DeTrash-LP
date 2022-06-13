@@ -10,10 +10,10 @@ const styles = {
 }
 
 const roadmapdata = [
-   [{title:"1. MINT PHASE", description:"Official Launch of the 10.000 Developer Punks NFT Collection on Polygon, Availiable to Mint", image: images.rm1}],
-   [{title:"2. COMMUNITY BUILD", description:"Official Launch of Discord Community for Web3 Devs, availiable only to Dev Punk Holders", image: images.rm2}],
-   [{title:"3. TUTORIAL DROPS", description:"Launch of weekly tutorial videos on how to develop web3 applications inside the community", image: images.rm3}],
-   [{title:"4. WORLD MEETUPS", description:"Online and presential events holded by the community, availiable only to members", image: images.rm4}],
+   [{title:"1. LANÇAMENTO", description:"Lançamento oficial do token RECY para iniciar a capitalização do projeto", image: images.rm2}],
+   [{title:"2. PROJETOS", description:"Alocamento da verba capitalizada em projetos com ONGS parceiras", image: images.rm4}],
+   [{title:"3. LISTAGEM", description:"Listagem oficial do token RECY no mercado secundário ", image: images.rm3}],
+   [{title:"4. DEFI", description:"Desenvolvimento de sistemas de recompensa com staking", image: images.rm1}],
 ]
 
 const Roadmap = () => {

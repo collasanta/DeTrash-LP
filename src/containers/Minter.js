@@ -6,20 +6,20 @@ import { ethers } from 'ethers'
 import abi from '../assets/VENDOR.json'
 
 const styles = {
-   bg: `bg-[#ffffff] px-[18px] pt-[40px] flex justify-center`,
-   about1: `font-[corbel]  text-[25px] text-center md:text-[30px] pt-[100px]`,
+   bg: `bg-[#ebf6ff] rounded-full shadow-l mx-auto max-w-[500px] min-w-[440px] shadow-lg px-[10px] py-[30px] flex justify-center`,
+   about1: `font-[corbel]  text-[25px] text-center md:text-[30px] pt-[100px] pb-[20px]`,
    green: `font-[corbel] text-[45px] text-[#64B6AC]`,
    grey: `font-[corbel] text-[45px] text-[#323232]`,
-   container: ` py-3 flex flex-col w-[360px] md:w-[600px] justify-center bg-[#ebf6ff] rounded-full shadow-lg  `,
+   container: `flex flex-col w-[360px] md:w-[600px] justify-center  `,
    div1: `py-3`,
    div2: ` mx-auto  w-[360px] text-center flex flex-col space-y-2 ` ,
-   input: `font-[corbel] text-[22px] flex justify-between  h-[40px]  bg-[#ffffff] rounded-full px-[10px] border-2 border-grey-300  mx-6`,
-   outputbox: `font-[corbel] ml-[10px] text-[22px] text-[#5BBAEB]`,
-   inputbox: `font-[corbel] ml-[10px] text-[22px]`,
+   input: `font-[corbel] text-[26px] flex justify-between  h-[60px] items-center  bg-[#ffffff] rounded-full px-[30px] border-2 border-blue-100  `,
+   outputbox: `font-[corbel] ml-[10px] text-[28px] text-[#5BBAEB]`,
+   inputbox: `font-[corbel] ml-[10px] max-w-[40px] text-[28px]`,
+   inputfield: `focus:outline-0`,
    metamaskerror: `font-[corbel] text-sm bg-[#ffffff] mx-6 capitalize p-1`,
    btnconnect: `font-[corbel] animate-pulse text-lg rounded-full bg-[#64B6AC] hover:bg-[#5BBAEB] text-white font-bold p-4 px-[60px]  shadow-md`,
-   amount: `font-[corbel] text-lg`,
-   btnmint: `font-[corbel] text-lg bg-[#64B6AC] hover:bg-[#5BBAEB] text-white rounded-full font-bold py-4 mx-6 shadow-md`,
+   btnmint: `animate-pulse font-[corbel] text-lg bg-[#64B6AC] hover:bg-[#5BBAEB] text-white rounded-full font-bold py-4  shadow-md`,
    counterbtnp: `bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l`,
    counterbtnn: `bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r`,
    counter: `bg-gray-200 text-gray-800 font-bold py-3 px-4`,
@@ -49,6 +49,8 @@ const Minter = () => {
    const [totalSold, setTotalsold] = useState()
    const [mintingmodal, setmintingmodal] = useState(false)
    const [dataloaded, setDataloaded] = useState(false)
+   const [tokensperCelo, setTokenspercelo] = useState()
+   const [celoPerTokens, setceloPerTokens] = useState()
   //  const [chainIdbg, setChainidbg] = useState()
    
    window.onload = function () {
@@ -154,12 +156,13 @@ const Minter = () => {
       const rpcurlprovider =  new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/celo")
       const contract =  new ethers.Contract(address, abi, rpcurlprovider) 
       async function loaddata(){
-         const nftcostbg = await contract.TokensperCelo()
-         const nftcostwei =  await nftcostbg.toString()
-         setnftcostwei (nftcostwei)
-         const nftcostethx = await nftcostwei / 1000000000000000000
-         const nftcosteth = await nftcostethx.toFixed(4)
-         setnftcosteth (nftcosteth)
+         const tokenspercello = await contract.TokensperCelo()
+         setTokenspercelo(ethers.utils.formatEther(tokenspercello.toString()))
+         const celopertokenss = await contract.PricecRecy()
+         setceloPerTokens(ethers.utils.formatEther(celopertokenss.toString()))
+         
+         console.log(tokensperCelo, "tokenspercello")
+         console.log(celopertokenss, "celopertokenss")
          setDataloaded(true)
       } 
       loaddata()
@@ -198,7 +201,7 @@ const Minter = () => {
                   {walletconnected ?  
                     <div className={styles.input}>
                       <div className={styles.inputbox}>
-                        <input placeholder='1 TOKEN' onChange={handleInputChange}></input>
+                        <input placeholder='1 TOKEN' className={styles.inputfield} onChange={handleInputChange}></input>
                       </div>
                       <div className={styles.inputdesc}>
                         CELO
@@ -211,7 +214,7 @@ const Minter = () => {
                   
                     <div className={styles.input}>
                       <div className={styles.outputbox}>
-                      {(buyAmount * 1/nftcosteth).toFixed(4)}
+                      {(Number(tokensperCelo).toFixed(4)) * buyAmount}
                       </div>
                       <div className={styles.inputdesc}>
                         RECY
@@ -234,7 +237,7 @@ const Minter = () => {
             { dataloaded ? 
               <div className={styles.price}>
                 1 Token RECY = 
-                <span className={styles.asupply}>{(1/nftcosteth).toFixed(4)}</span> Celo
+                <span className={styles.asupply}>{celoPerTokens}</span> Celo
               </div> 
             :
             ""
