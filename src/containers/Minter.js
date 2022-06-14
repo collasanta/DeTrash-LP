@@ -54,7 +54,11 @@ const Minter = () => {
    const [celoPerTokens, setceloPerTokens] = useState()
    const [pageURL, setPageURL] = useState(0);
   //  const [chainIdbg, setChainidbg] = useState()
-   
+
+    useEffect(() => {
+      setPageURL(window.location.href.replace(/^https?:\/\//, ''));
+    }, []);
+
     useEffect(() => {
       const rpcurlprovider =  new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/celo")
       const contract =  new ethers.Contract(address, abi, rpcurlprovider) 
