@@ -8,7 +8,7 @@ import abi from '../assets/VENDOR.json'
 const styles = {
    bg: `bg-[#ebf6ff] rounded-full shadow-l mx-auto max-w-[500px] min-w-[440px] shadow-lg px-[10px] py-[30px] flex justify-center`,
    about1: `font-[Kollektif]  text-[25px] text-center md:text-[30px] pt-[100px] pb-[20px]`,
-   green: `font-[Kollektif] text-[45px] text-[#4c87ef]`,
+   green: `font-[Kollektif] text-[45px] text-[#5BBAEB]`,
    grey: `font-[Kollektif] text-[45px] text-[#323232]`,
    container: `flex flex-col w-[360px] md:w-[600px] justify-center  `,
    div1: `py-3`,
@@ -18,7 +18,7 @@ const styles = {
    inputbox: `font-[Kollektif] ml-[10px] max-w-[40px] text-[28px]`,
    inputfield: `focus:outline-0`,
    metamaskerror: `font-[Kollektif] text-sm bg-[#ffffff] mx-6 capitalize p-1`,
-   btnconnect: `font-[Kollektif] animate-pulse text-lg rounded-full bg-[#64b6a6] hover:bg-[#4c87ef] text-white font-bold p-4 px-[60px]  shadow-md`,
+   btnconnect: `font-[Kollektif] animate-pulse text-lg rounded-full bg-[#64b6a6] hover:bg-[#5BBAEB] text-white font-bold p-4 px-[60px]  shadow-md`,
    btnmint: `animate-pulse font-[Kollektif] text-lg bg-[#64B6AC] hover:bg-[#5BBAEB] text-white rounded-full font-bold py-4  shadow-md`,
    counterbtnp: `bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l`,
    counterbtnn: `bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r`,

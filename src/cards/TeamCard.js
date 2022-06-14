@@ -10,7 +10,7 @@ const TeamCard = ({cardinfo}) => {
       container: ` p-3 m-3 md:min-w-[300px]  flex flex-row justify-center md:flex-col   `,
       container2: `flex flex-col justify-end`,
       image: ` min-w-[150px] max-w-[150px] min-h-[120px] md:max-w-[220px]  md:mx-auto md:mb-[20px]  `,
-      titlebox: `z-0 hover:bg-[#4c87ef] bg-[#64B6AC] shadow-md w-[220px]  md:w-[280px] h-[45px] md:max-w-[280px] md:h-[60px]  py-[5px]  rounded-r-full `,
+      titlebox: `z-0 hover:bg-[#5BBAEB] bg-[#64B6AC] shadow-md w-[220px]  md:w-[280px] h-[45px] md:max-w-[280px] md:h-[60px]  py-[5px]  rounded-r-full `,
       title: ` ml-[10px] font-[Kollektif] text-white md:text-[25px] text-[20px] ml-[10px]`,
       descbox: `max-w-[280px] bg-[#f1f1f1f1] rounded-tr-[90px] rounded-br-[40px]`,
       desc: ` font-[Kollektif] md:text-[18px] text-[12px] ml-[5px]  `,
