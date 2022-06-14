@@ -7,7 +7,7 @@ import abi from '../assets/VENDOR.json'
 
 const styles = {
    bg: `bg-[#ebf6ff] rounded-full shadow-l mx-auto max-w-[500px] min-w-[375px] shadow-lg px-[10px] pt-[20px] pb-[10px] flex justify-center`,
-   about1: `font-[Kollektif]  text-[35px] text-center md:text-[30px] pt-[100px] pb-[20px]`,
+   about1: `font-[Kollektif]  text-[35px] text-center md:text-[40px] pt-[100px] pb-[20px]`,
    green: `font-[Kollektif]  text-[#5BBAEB]`,
    grey: `font-[Kollektif] text-[#323232]`,
    container: `flex flex-col w-[360px] md:w-[600px] justify-center  `,
