@@ -25,7 +25,9 @@ const Navbar = () => {
     <div className={styles.wrapper}>
       
        <div className={styles.logo}>
-          <img className={styles.dtlogo} src={images.dtlogo}/>
+          <a href='https://detrashtoken.com'>
+            <img className={styles.dtlogo} src={images.dtlogo2}/>
+          </a>
        </div>
 
        <ul className={styles.menu}>

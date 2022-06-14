@@ -12,12 +12,14 @@ import ln from './linkedin.svg';
 import pl from './polygon.png';
 import dtlogo from './detrashlogo.png';
 import dtlogo2 from './detrashlogo2.png';
+import celodt from './celodt.png';
 
 
 
 export default {
    dtlogo,
    dtlogo2,
+   celodt,
    p1,
    p2,
    p3,

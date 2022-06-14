@@ -25,7 +25,7 @@ const styles = {
    counterbtnn: `bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r`,
    counter: `bg-gray-200 text-gray-800 font-bold py-3 px-4`,
    asupply: ` text-[22px] text-center text-[#45c76e]`,
-   polygon: `max-w-[110px] mx-auto`,
+   polygon: `max-w-[200px] mx-auto`,
    modal: `mx-auto`,
    spinner: `mx-auto m-[20px] w-20 h-20 rounded-full animate-spin border-8 border-solid border-[#5BBAEB] border-t-transparent`,
    opensea: `max-w-[260px] mx-auto pt-[20px]`,
@@ -190,7 +190,7 @@ const Minter = () => {
          <div className={styles.container}>
 
             <div className={styles.div1}>
-               <img src={images.pl} alt="" className={styles.polygon}></img>
+               <img src={images.celodt} alt="" className={styles.polygon}></img>
             </div>
             
 
@@ -231,7 +231,7 @@ const Minter = () => {
                       {(Number(tokensperCelo) * buyAmount).toFixed(2)}
                       </div>
                       <div className={styles.inputdesc}>
-                        RECY
+                        cRECY
                       </div>
                      
                     </div>
@@ -250,7 +250,7 @@ const Minter = () => {
 
             { dataloaded ? 
               <div className={styles.price}>
-                1 Token RECY = 
+                1 Token cRECY = 
                 <span className={styles.asupply}>{celoPerTokens}</span> CELO
               </div> 
               :
