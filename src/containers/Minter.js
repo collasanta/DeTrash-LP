@@ -250,7 +250,7 @@ const Minter = () => {
 
             { dataloaded ? 
               <div className={styles.price}>
-                1 cRECY = &nbsp;
+                <a className={styles.asupply}>1</a> cRECY = &nbsp;
                 <span className={styles.asupply}>{celoPerTokens}</span> CELO
               </div> 
               :
