@@ -11,11 +11,13 @@ import gh from './github.svg';
 import ln from './linkedin.svg';
 import pl from './polygon.png';
 import dtlogo from './detrashlogo.png';
+import dtlogo2 from './detrashlogo2.png';
 
 
 
 export default {
    dtlogo,
+   dtlogo2,
    p1,
    p2,
    p3,

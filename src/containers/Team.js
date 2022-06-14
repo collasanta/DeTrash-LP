@@ -12,9 +12,9 @@ const styles = {
 }
 
 const teamdata = [
-   [{title:"Beatriz Siqueira", description:"Fundadora responsável por decidir e executar o planejamento de desenvolvimento e gestão do nosso time de desenvolvimento", image: images.p2, linkedin:"https://www.linkedin.com/in/victor-collasanta-a4b9a913b/", twitter:'https://twitter.com/0xKabutoDev', github:'https://github.com/collasanta',}],
-   [{title:"Philipp Teles", description:"Empreendedor com carreira em startups de crescimento acelerado, criou a DeTrash e o modelo de negócio do RECY para limpar os oceanos.", image: images.p1, linkedin:"#team", twitter:'#team', github:'#team',}],
-   [{title:"Matheus Rocha", description:"Matheus é o COO buscando sempre melhorar os processos, atua no planejamento estratégico e impulsionar as vendas dos cripto ativos", image: images.p3, linkedin:"#team", twitter:'#team', github:'#team',}],
+   [{title:"Beatriz Siqueira", description:"Fundadora responsável por decidir e executar o planejamento de desenvolvimento e gestão do nosso time de desenvolvimento", image: images.p2, linkedin:"https://www.linkedin.com/in/beatriz-siqueira-79a8b9147/", twitter:'https://twitter.com/LilSugarPiee', github:'https://github.com/biadebeatriz.com/collasanta',}],
+   [{title:"Philipp Teles", description:"Empreendedor com carreira em startups de crescimento acelerado, criou a DeTrash e o modelo de negócio do RECY para limpar os oceanos.", image: images.p1, linkedin:"https://www.linkedin.com/in/philipptvoh/", twitter:'https://www.twitter.com/telesvon', github:'',}],
+   [{title:"Matheus Rocha", description:"Matheus é o COO buscando sempre melhorar os processos, atua no planejamento estratégico e impulsionar as vendas dos cripto ativos", image: images.p3, linkedin:"https://www.linkedin.com/in/matheus-dias-b62b1b52/", twitter:'', github:'',}],
 ]
 const Team = () => {
   return (
