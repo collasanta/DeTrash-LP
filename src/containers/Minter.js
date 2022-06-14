@@ -6,29 +6,30 @@ import { ethers } from 'ethers'
 import abi from '../assets/VENDOR.json'
 
 const styles = {
-   bg: `bg-[#ebf6ff] rounded-full shadow-l mx-auto max-w-[500px] min-w-[440px] shadow-lg px-[10px] py-[30px] flex justify-center`,
-   about1: `font-[Kollektif]  text-[25px] text-center md:text-[30px] pt-[100px] pb-[20px]`,
-   green: `font-[Kollektif] text-[45px] text-[#5BBAEB]`,
-   grey: `font-[Kollektif] text-[45px] text-[#323232]`,
+   bg: `bg-[#ebf6ff] rounded-full shadow-l mx-auto max-w-[500px] min-w-[375px] shadow-lg px-[10px] pt-[20px] pb-[10px] flex justify-center`,
+   about1: `font-[Kollektif]  text-[35px] text-center md:text-[30px] pt-[100px] pb-[20px]`,
+   green: `font-[Kollektif]  text-[#5BBAEB]`,
+   grey: `font-[Kollektif] text-[#323232]`,
    container: `flex flex-col w-[360px] md:w-[600px] justify-center  `,
-   div1: `py-3`,
+   div1: `pb-3`,
    div2: ` mx-auto  w-[360px] text-center flex flex-col space-y-2 ` ,
-   input: `font-[Kollektif] text-[26px] flex justify-between  h-[60px] items-center  bg-[#ffffff] rounded-full px-[30px] border-2 border-blue-100  `,
-   outputbox: `font-[Kollektif] ml-[10px] text-[28px] text-[#5BBAEB]`,
-   inputbox: `font-[Kollektif] ml-[10px] max-w-[40px] text-[28px]`,
-   inputfield: `focus:outline-0`,
+   input: `font-[Kollektif] text-[26px] mx-5 flex justify-between  h-[60px] items-center  bg-[#ffffff] rounded-full px-[30px] border-2 border-blue-100  `,
+   outputbox: `font-[Kollektif] ml-[10px] text-[28px] max-w-[165px] overflow-hidden truncate  text-[#5BBAEB]`,
+   inputbox: `font-[Kollektif] ml-[10px] max-w-[165px] overflow-hidden text-[28px]`,
+   inputfield: `focus:outline-0 w-[165px] text-[#64B6AC] truncate   `,
+   inputdesc: `text-[grey]`,
    metamaskerror: `font-[Kollektif] text-sm bg-[#ffffff] mx-6 capitalize p-1`,
    btnconnect: `font-[Kollektif] animate-pulse text-lg rounded-full bg-[#64b6a6] hover:bg-[#5BBAEB] text-white font-bold p-4 px-[60px]  shadow-md`,
-   btnmint: `animate-pulse font-[Kollektif] text-lg bg-[#64B6AC] hover:bg-[#5BBAEB] text-white rounded-full font-bold py-4  shadow-md`,
+   btnmint: `animate-pulse font-[Kollektif] text-lg bg-[#64B6AC] hover:bg-[#5BBAEB] text-white rounded-full mx-7 font-bold py-4  shadow-md`,
    counterbtnp: `bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l`,
    counterbtnn: `bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r`,
    counter: `bg-gray-200 text-gray-800 font-bold py-3 px-4`,
-   asupply: ` text-[30px] text-center text-[#45c76e]`,
-   polygon: `max-w-[130px] mx-auto`,
+   asupply: ` text-[22px] text-center text-[#45c76e]`,
+   polygon: `max-w-[110px] mx-auto`,
    modal: `mx-auto`,
    spinner: `mx-auto m-[20px] w-20 h-20 rounded-full animate-spin border-8 border-solid border-[#5BBAEB] border-t-transparent`,
    opensea: `max-w-[260px] mx-auto pt-[20px]`,
-   price: ` text-center mx-6 font-[Kollektif] text-[22px]`,
+   price: ` text-center mx-6 font-[Kollektif] text-[18px] pt-[15px] pb-[15px] text-[#7d818c]`,
 
 }
 
@@ -201,7 +202,7 @@ const Minter = () => {
                   {walletconnected ?  
                     <div className={styles.input}>
                       <div className={styles.inputbox}>
-                        <input placeholder='1 TOKEN' className={styles.inputfield} onChange={handleInputChange}></input>
+                        <input placeholder='1 TOKEN' type="number" className={styles.inputfield} onChange={handleInputChange}></input>
                       </div>
                       <div className={styles.inputdesc}>
                         CELO
@@ -214,7 +215,7 @@ const Minter = () => {
                   
                     <div className={styles.input}>
                       <div className={styles.outputbox}>
-                      {(Number(tokensperCelo).toFixed(4)) * buyAmount}
+                      {(Number(tokensperCelo) * buyAmount).toFixed(2)}
                       </div>
                       <div className={styles.inputdesc}>
                         RECY
@@ -237,7 +238,7 @@ const Minter = () => {
             { dataloaded ? 
               <div className={styles.price}>
                 1 Token RECY = 
-                <span className={styles.asupply}>{celoPerTokens}</span> Celo
+                <span className={styles.asupply}>{celoPerTokens}</span> CELO
               </div> 
             :
             ""
