@@ -3,27 +3,6 @@
 @tailwind utilities;
 
 @font-face {
-   font-family: "pix";
-   src: local("pix"),
-    url("./assets/pix.ttf") format("truetype");
-   font-weight: bold;
-   }
-
-@font-face {
-   font-family: "quarlow";
-   src: local("quarlow"),
-    url("./assets/quarlow.ttf") format("truetype");
-   font-weight: bold;
-   }
-
-@font-face {
-   font-family: "minitel";
-   src: local("Minitel"),
-    url("./assets/Minitel.ttf") format("truetype");
-   font-weight: bold;
-   }
-
-@font-face {
    font-family: "kollektif";
    src: local("Kollektif"),
     url("./assets/Kollektif.ttf") format("truetype");
