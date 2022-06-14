@@ -6,7 +6,7 @@ const styles = {
    container: `py-[70px] space-y-4  flex flex-col justify-center bg-[#ebf6ff]`,
    header: `font-[corbel] text-[45px] text-center px-[20px] leading-[50px]`,
    cardcontainer: `py-[25px] mx-auto md:max-w-[1800px] md:flex flex-row flex-wrap   max-w-screen justify-center `,
-   green: `text-[#5bbaeb]`,
+   green: `text-[#0575e6]`,
 }
 
 const roadmapdata = [
