@@ -3,7 +3,7 @@ import FAQCard from '../cards/FAQCard';
 
 const styles = {
    container: `space-y-4 py-[50px] pb-[100px] flex flex-col justify-center bg-[#ebf6ff]`,
-   header: `font-[corbel] text-[45px] text-center px-[20px] leading-[50px]`,
+   header: `font-[Kollektif] text-[45px] text-center px-[20px] leading-[50px]`,
    cardcontainer: `py-[25px] mx-auto md:max-w-[1800px] md:flex flex-row flex-wrap   max-w-screen justify-center `,
    purple: `text-[#6e45c7]`,
    faqcontainer: `mx-auto flex flex-col flex-wrap md:flex-row md:justify-center  justify-start`,

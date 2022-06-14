@@ -5,11 +5,11 @@ import { images } from '../assets';
 
 const styles = {
    wrapper: `z-[1] shadow-sm fixed  px-8 h-[70px]  w-screen flex justify-between items-center bg-[#ebf6ff] text-black overflow:hidden `,
-   logo: `flex w-1/8 items-center justify-start font-['corbel'] text-[2rem] text-[#78818e]  `,
+   logo: `flex w-1/8 items-center justify-start font-['Kollektif'] text-[2rem] text-[#78818e]  `,
    logospan: `text-[#6e45c7]`,
    menu: `hidden md:flex block `,
-   menuitem: `px-4 py-2 m-1 flex items-center text-lg font-['corbel'] text-[1.4rem] cursor-pointer rounded-3xl hover:text-[#64b6ac] text-[#78818e]`,
-   sidebaritems: `fixed text-center w-full h-full right-0 top-0  text-[2rem] bg-[#ffffff] font-['corbel'] text-[#78818e]`,
+   menuitem: `px-4 py-2 m-1 flex items-center text-lg font-['Kollektif'] text-[1.4rem] cursor-pointer rounded-3xl hover:text-[#64b6ac] text-[#78818e]`,
+   sidebaritems: `fixed text-center w-full h-full right-0 top-0  text-[2rem] bg-[#ffffff] font-['Kollektif'] text-[#78818e]`,
    sidebaritemhover: `hover:text-[#64b6ac]`,
    sidebar: ` visible md:hidden flex  `,
    oplogo: `max-w-[35px] mr-[35px] `,

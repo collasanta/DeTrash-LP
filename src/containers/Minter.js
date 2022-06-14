@@ -7,19 +7,19 @@ import abi from '../assets/VENDOR.json'
 
 const styles = {
    bg: `bg-[#ebf6ff] rounded-full shadow-l mx-auto max-w-[500px] min-w-[440px] shadow-lg px-[10px] py-[30px] flex justify-center`,
-   about1: `font-[corbel]  text-[25px] text-center md:text-[30px] pt-[100px] pb-[20px]`,
-   green: `font-[corbel] text-[45px] text-[#0575e6]`,
-   grey: `font-[corbel] text-[45px] text-[#323232]`,
+   about1: `font-[Kollektif]  text-[25px] text-center md:text-[30px] pt-[100px] pb-[20px]`,
+   green: `font-[Kollektif] text-[45px] text-[#0575e6]`,
+   grey: `font-[Kollektif] text-[45px] text-[#323232]`,
    container: `flex flex-col w-[360px] md:w-[600px] justify-center  `,
    div1: `py-3`,
    div2: ` mx-auto  w-[360px] text-center flex flex-col space-y-2 ` ,
-   input: `font-[corbel] text-[26px] flex justify-between  h-[60px] items-center  bg-[#ffffff] rounded-full px-[30px] border-2 border-blue-100  `,
-   outputbox: `font-[corbel] ml-[10px] text-[28px] text-[#5BBAEB]`,
-   inputbox: `font-[corbel] ml-[10px] max-w-[40px] text-[28px]`,
+   input: `font-[Kollektif] text-[26px] flex justify-between  h-[60px] items-center  bg-[#ffffff] rounded-full px-[30px] border-2 border-blue-100  `,
+   outputbox: `font-[Kollektif] ml-[10px] text-[28px] text-[#5BBAEB]`,
+   inputbox: `font-[Kollektif] ml-[10px] max-w-[40px] text-[28px]`,
    inputfield: `focus:outline-0`,
-   metamaskerror: `font-[corbel] text-sm bg-[#ffffff] mx-6 capitalize p-1`,
-   btnconnect: `font-[corbel] animate-pulse text-lg rounded-full bg-[#64B6AC] hover:bg-[#4c87ef] text-white font-bold p-4 px-[60px]  shadow-md`,
-   btnmint: `animate-pulse font-[corbel] text-lg bg-[#64B6AC] hover:bg-[#5BBAEB] text-white rounded-full font-bold py-4  shadow-md`,
+   metamaskerror: `font-[Kollektif] text-sm bg-[#ffffff] mx-6 capitalize p-1`,
+   btnconnect: `font-[Kollektif] animate-pulse text-lg rounded-full bg-[#64B6AC] hover:bg-[#4c87ef] text-white font-bold p-4 px-[60px]  shadow-md`,
+   btnmint: `animate-pulse font-[Kollektif] text-lg bg-[#64B6AC] hover:bg-[#5BBAEB] text-white rounded-full font-bold py-4  shadow-md`,
    counterbtnp: `bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l`,
    counterbtnn: `bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r`,
    counter: `bg-gray-200 text-gray-800 font-bold py-3 px-4`,
@@ -28,7 +28,7 @@ const styles = {
    modal: `mx-auto`,
    spinner: `mx-auto m-[20px] w-20 h-20 rounded-full animate-spin border-8 border-solid border-blue-300 border-t-transparent`,
    opensea: `max-w-[260px] mx-auto pt-[20px]`,
-   price: ` text-center mx-6 font-[corbel] text-[22px]`,
+   price: ` text-center mx-6 font-[Kollektif] text-[22px]`,
 
 }
 
