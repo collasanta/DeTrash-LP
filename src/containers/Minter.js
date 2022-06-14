@@ -8,7 +8,7 @@ import abi from '../assets/VENDOR.json'
 const styles = {
    bg: `bg-[#ebf6ff] rounded-full shadow-l mx-auto max-w-[500px] min-w-[375px] shadow-lg px-[10px] pt-[20px] pb-[10px] flex justify-center`,
    about1: `font-[Kollektif]  text-[35px] text-center md:text-[40px] pt-[100px] pb-[20px]`,
-   green: `font-[Kollektif]  text-[#5BBAEB]`,
+   green: `font-[Kollektif]  text-[#155ad5]`,
    grey: `font-[Kollektif] text-[#323232]`,
    container: `flex flex-col w-[360px] md:w-[600px] justify-center  `,
    div1: `pb-3`,
@@ -52,8 +52,24 @@ const Minter = () => {
    const [dataloaded, setDataloaded] = useState(false)
    const [tokensperCelo, setTokenspercelo] = useState()
    const [celoPerTokens, setceloPerTokens] = useState()
+   const [pageURL, setPageURL] = useState(0);
   //  const [chainIdbg, setChainidbg] = useState()
    
+    useEffect(() => {
+      const rpcurlprovider =  new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/celo")
+      const contract =  new ethers.Contract(address, abi, rpcurlprovider) 
+        async function loaddata(){
+          const tokenspercello = await contract.TokensperCelo()
+          setTokenspercelo(ethers.utils.formatEther(tokenspercello.toString()))
+          const celopertokenss = await contract.PricecRecy()
+          setceloPerTokens(ethers.utils.formatEther(celopertokenss.toString()))
+          setDataloaded(true)
+        } 
+      loaddata()
+     }, [])
+
+     const deeplinkMetamask = () => { window.location.href = `https://metamask.app.link/dapp/${pageURL}` };
+
    window.onload = function () {
 
       async function handleaccountchange() {
@@ -111,6 +127,10 @@ const Minter = () => {
    }
 
    async function connectWallet () {
+    console.log("metamask", metamask)
+    if (!metamask) {
+      deeplinkMetamask()
+    }
     const chainIdbg = await window.ethereum.chainId
     console.log("window.ethereum chainIdbg connectwallet",chainIdbg)
     console.log("metamaskprovider connectwallet",metamaskprovider)
@@ -153,21 +173,7 @@ const Minter = () => {
       }
    }
 
-   useEffect(() => {
-      const rpcurlprovider =  new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/celo")
-      const contract =  new ethers.Contract(address, abi, rpcurlprovider) 
-      async function loaddata(){
-         const tokenspercello = await contract.TokensperCelo()
-         setTokenspercelo(ethers.utils.formatEther(tokenspercello.toString()))
-         const celopertokenss = await contract.PricecRecy()
-         setceloPerTokens(ethers.utils.formatEther(celopertokenss.toString()))
-         
-         console.log(tokensperCelo, "tokenspercello")
-         console.log(celopertokenss, "celopertokenss")
-         setDataloaded(true)
-      } 
-      loaddata()
-   }, [])
+
    
 
   return (
@@ -188,16 +194,19 @@ const Minter = () => {
 
             {
             !mintingmodal 
-            ?
+            ? 
                <div className={styles.div2}>
-                  {metamask & dataloaded ?
+                  
+                  { dataloaded ?
 
                      <div className={styles.btndiv} > 
                         { walletconnected ? "" :
                            <button className={styles.btnconnect} onClick={() => {connectWallet()}}>CONECTAR CARTEIRA</button>    
                         }
                      </div>
-                  : <div className={styles.spinner}> </div> }                           
+                  : <div className={styles.spinner}> </div> }   
+
+                    
 
                   {walletconnected ?  
                     <div className={styles.input}>
@@ -240,9 +249,15 @@ const Minter = () => {
                 1 Token RECY = 
                 <span className={styles.asupply}>{celoPerTokens}</span> CELO
               </div> 
-            :
-            ""
+              :
+              ""
             }
+            
+            
+                           
+             
+
+          
 
 
          </div>
