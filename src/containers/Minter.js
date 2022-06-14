@@ -26,7 +26,7 @@ const styles = {
    asupply: ` text-[30px] text-center text-[#45c76e]`,
    polygon: `max-w-[130px] mx-auto`,
    modal: `mx-auto`,
-   spinner: `mx-auto m-[20px] w-20 h-20 rounded-full animate-spin border-8 border-solid border-blue-300 border-t-transparent`,
+   spinner: `mx-auto m-[20px] w-20 h-20 rounded-full animate-spin border-8 border-solid border-[#5BBAEB] border-t-transparent`,
    opensea: `max-w-[260px] mx-auto pt-[20px]`,
    price: ` text-center mx-6 font-[Kollektif] text-[22px]`,
 

@@ -10,10 +10,11 @@ const styles = {
 }
 
 const roadmapdata = [
-   [{title:"1. LANÇAMENTO", description:"Lançamento oficial do token RECY para iniciar a capitalização do projeto", image: images.rm2}],
-   [{title:"2. PROJETOS", description:"Alocamento da verba capitalizada em projetos com ONGS parceiras", image: images.rm4}],
-   [{title:"3. LISTAGEM", description:"Listagem oficial do token RECY no mercado secundário ", image: images.rm3}],
-   [{title:"4. DEFI", description:"Desenvolvimento de sistemas de recompensa com staking", image: images.rm1}],
+   [{title:"1. cRECY Deploy", description:"Desenvolvimento do tokenomics, whitepaper e contrato inteligente do cRECY", image: images.rm2}],
+   [{title:"2. DApp Beta", description:"Lançamento da primeira versão do RECY App com as funções de submeter relatórios de reciclagem, chat entre usuários geolocalização de coleta", image: images.rm4}],
+   [{title:"3. Primeira Cidade", description:"Substituir o sistema atual de coleta de resíduos de uma cidade", image: images.rm3}],
+   [{title:"4. DApp Completo", description:"Lançamento da versão completa do aplicativo com exchange, auditoria de relatórios, staking, integração de nodes e marketplace de recicláveis ara fornecimento para indústria", image: images.rm1}],
+   [{title:"5. DAO", description:"Descentralização da governança através do lançamento de um token de governança", image: images.rm5}],
 ]
 
 const Roadmap = () => {
