@@ -12,7 +12,7 @@ const Footer = () => {
     <>
     <div className={styles.container}>
     <a href='https://detrashtoken.com'>
-      <img src={images.dtlogo2} className={styles.img}></img>
+      <img src={images.dtlogo2} className={styles.img} alt=''></img>
       </a>
     </div>
     <div className={styles.c2}>
