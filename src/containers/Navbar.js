@@ -29,7 +29,7 @@ const Navbar = () => {
        </div>
 
        <ul className={styles.menu}>
-         {['SOBRE', 'ROADMAP', 'EQUIPE', 'FAQ' ].map((item)=> (
+         {['SOBRE', 'ROADMAP', 'EQUIPE' ].map((item)=> (
             <li className={styles.menuitem} key={`link-${item}`}>
                <div />
                <a href={`#${item}`}>{item}</a>
@@ -55,7 +55,7 @@ const Navbar = () => {
             transition={{ duration: 0.85, ease: 'easeOut' }}
           >
                <HiX size={35} color='#64b6ac' onClick={() => setToggle(false)} />       
-               {['SOBRE', 'ROADMAP', 'EQUIPE', 'FAQ'].map((item) => (
+               {['SOBRE', 'ROADMAP', 'EQUIPE'].map((item) => (
                <li className={styles.sidebaritemhover} key={item}>
                   <a href={`#${item}`} onClick={() => setToggle(false)}>
                      {item}

@@ -1,4 +1,4 @@
-import { Navbar, Carousel, Minter, About, Traits, Roadmap, Team, FAQ } from './containers';
+import { Navbar, Carousel, Minter, About, Traits, Roadmap, Team } from './containers';
 
 
 export default function App() {

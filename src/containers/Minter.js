@@ -8,8 +8,8 @@ import abi from '../assets/VENDOR.json'
 const styles = {
    bg: `bg-[#ebf6ff] rounded-full shadow-l mx-auto max-w-[500px] min-w-[375px] shadow-lg px-[10px] pt-[20px] pb-[10px] flex justify-center`,
    about1: `font-[Kollektif]  text-[35px] text-center md:text-[40px] pt-[100px] pb-[20px]`,
-   green: `font-[Kollektif]  text-[#155ad5]`,
-   grey: `font-[Kollektif] text-[#323232]`,
+   green: `font-[Kollektif]  text-[#013a81]`,
+   grey: `font-[Kollektif] `,
    container: `flex flex-col w-[360px] md:w-[600px] justify-center  `,
    div1: `pb-3`,
    div2: ` mx-auto  w-[360px] text-center flex flex-col space-y-2 ` ,
