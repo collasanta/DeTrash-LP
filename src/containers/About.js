@@ -1,5 +1,4 @@
 import React from 'react'
-import { images } from '../assets';
 
 const styles ={
    container: `space-y-4 flex flex-col justify-center pt-[70px] pb-[70px] `,
@@ -17,11 +16,9 @@ const About = () => {
          </p>
          <div className={styles.about2}>
          Começamos com o primeiro token para limpar os oceanos, o cRECY. Mas queremos ir muito além para transformar como podemos manter todo o planeta limpo de forma descentralizada, mais transparente e mais eficiente.
-
          </div>
       </div>
      </>
-    
   )
 }
 

@@ -23,64 +23,42 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false)
   return (
     <div className={styles.wrapper}>
-      
-       <div className={styles.logo}>
-          <a href='https://detrashtoken.com'>
-            <img className={styles.dtlogo} src={images.dtlogo2}/>
-          </a>
-       </div>
-
-       <ul className={styles.menu}>
-         {['SOBRE', 'ROADMAP', 'EQUIPE' ].map((item)=> (
-            <li className={styles.menuitem} key={`link-${item}`}>
-               <div />
-               <a href={`#${item}`}>{item}</a>
-            </li>
-
-         ))}
-      </ul>
-      
-
-
-
-      <div className={styles.sidebar}>
-      
-      <HiMenuAlt4  className={styles.menubutton} size={35} onClick={() => setToggle(true)} />  
-
-         {toggle && (      
-            <div className={styles.sidebarbg}
-         >  
-
-            <ul className={styles.sidebaritems}>
-            <motion.div
-            whileInView={{ x: [300, 0] }}
-            transition={{ duration: 0.85, ease: 'easeOut' }}
-          >
-               <HiX size={35} color='#64b6ac' onClick={() => setToggle(false)} />       
-               {['SOBRE', 'ROADMAP', 'EQUIPE'].map((item) => (
-               <li className={styles.sidebaritemhover} key={item}>
-                  <a href={`#${item}`} onClick={() => setToggle(false)}>
-                     {item}
-                  </a>
-               </li>
-               ))}
-               </motion.div>
-            </ul>
-
-            </div>
-            
-          )}
-
-
-
+      <div className={styles.logo}>
+        <a href='https://detrashtoken.com'>
+          <img className={styles.dtlogo} src={images.dtlogo2} alt=''/>
+        </a>
       </div>
-
-   
-
-
-       
-
-
+      <ul className={styles.menu}>
+        {['SOBRE', 'ROADMAP', 'EQUIPE' ].map((item)=> (
+        <li className={styles.menuitem} key={`link-${item}`}>
+          <div />
+          <a href={`#${item}`}>{item}</a>
+        </li>
+        ))}
+      </ul>
+      <div className={styles.sidebar}>
+        <HiMenuAlt4  className={styles.menubutton} size={35} onClick={() => setToggle(true)} />  
+          {toggle && (      
+            <div className={styles.sidebarbg}> 
+              <ul className={styles.sidebaritems}>
+                  <motion.div
+                  whileInView={{ x: [300, 0] }}
+                  transition={{ duration: 0.85, ease: 'easeOut' }}
+                >
+                <HiX size={35} color='#64b6ac' onClick={() => setToggle(false)} />       
+                  {['SOBRE', 'ROADMAP', 'EQUIPE'].map((item) => (
+                  <li className={styles.sidebaritemhover} key={item}>
+                    <a href={`#${item}`} onClick={() => setToggle(false)}>
+                        {item}
+                    </a>
+                  </li>
+                  ))}
+                </motion.div>
+              </ul>
+            </div>
+            )
+          }
+      </div>
     </div>
   )
 }

@@ -18,103 +18,90 @@ const styles = {
    inputbox: `font-[Kollektif] ml-[10px] max-w-[165px] overflow-hidden text-[28px]`,
    inputfield: `focus:outline-0 w-[165px] text-[#64B6AC] truncate   `,
    inputdesc: `text-[grey]`,
-   metamaskerror: `font-[Kollektif] text-sm bg-[#ffffff] mx-6 capitalize p-1`,
    btnconnect: `font-[Kollektif] animate-pulse text-lg rounded-full bg-[#64b6a6] hover:bg-[#5BBAEB] text-white font-bold p-4 px-[60px]  shadow-md`,
    btnmint: `animate-pulse font-[Kollektif] text-lg bg-[#64B6AC] hover:bg-[#5BBAEB] text-white rounded-full mx-7 font-bold py-4  shadow-md`,
-   counterbtnp: `bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l`,
-   counterbtnn: `bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r`,
-   counter: `bg-gray-200 text-gray-800 font-bold py-3 px-4`,
    asupply: ` text-[22px] text-center text-[#45c76e]`,
    polygon: `max-w-[200px] mx-auto`,
    modal: `mx-auto`,
    spinner: `mx-auto m-[20px] w-20 h-20 rounded-full animate-spin border-8 border-solid border-[#5BBAEB] border-t-transparent`,
-   opensea: `max-w-[260px] mx-auto pt-[20px]`,
    price: ` text-center mx-6 font-[Kollektif] text-[18px] pt-[15px] pb-[15px] text-[#7d818c]`,
-
 }
-
 
 const address = "0x6FF99dD8E23BbfB9340Aa6eE8878917229505537"
 const rpcurlprovider =  new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/celo")
 const contract =  new ethers.Contract(address, abi, rpcurlprovider) 
 
-
 const Minter = () => {
-   const [buyAmount, setBuyAmount] = useState(1)
-   const [metamask, setmetamask] = useState(false)
-   const [walletconnected, setWalletconnected] = useState(false)
-   const [metamaskprovider, setMetamaskprovider] = useState([])
-   const [nftcostwei, setnftcostwei] = useState("0")
-   const [nftcosteth, setnftcosteth] = useState("0")
-   const [price, setprice] = useState()
-   const [totalSold, setTotalsold] = useState()
-   const [mintingmodal, setmintingmodal] = useState(false)
-   const [dataloaded, setDataloaded] = useState(false)
-   const [tokensperCelo, setTokenspercelo] = useState()
-   const [celoPerTokens, setceloPerTokens] = useState()
-   const [pageURL, setPageURL] = useState(0);
-  //  const [chainIdbg, setChainidbg] = useState()
+  const [buyAmount, setBuyAmount] = useState(1)
+  const [metamask, setmetamask] = useState(false)
+  const [walletconnected, setWalletconnected] = useState(false)
+  const [metamaskprovider, setMetamaskprovider] = useState([])
+  const [mintingmodal, setmintingmodal] = useState(false)
+  const [dataloaded, setDataloaded] = useState(false)
+  const [tokensperCelo, setTokenspercelo] = useState()
+  const [celoPerTokens, setceloPerTokens] = useState()
+  const [pageURL, setPageURL] = useState(0);
 
-    useEffect(() => {
-      setPageURL(window.location.href.replace(/^https?:\/\//, ''));
-    }, []);
+  useEffect(() => {
+    setPageURL(window.location.href.replace(/^https?:\/\//, ''));
+  }, []);
 
-    useEffect(() => {
-      const rpcurlprovider =  new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/celo")
-      const contract =  new ethers.Contract(address, abi, rpcurlprovider) 
-        async function loaddata(){
-          const tokenspercello = await contract.TokensperCelo()
-          setTokenspercelo(ethers.utils.formatEther(tokenspercello.toString()))
-          const celopertokenss = await contract.PricecRecy()
-          setceloPerTokens(ethers.utils.formatEther(celopertokenss.toString()))
-          setDataloaded(true)
-        } 
-      loaddata()
-     }, [])
+  useEffect(() => {
+    const rpcurlprovider =  new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/celo")
+    const contract =  new ethers.Contract(address, abi, rpcurlprovider) 
+      async function loaddata(){
+        const tokenspercello = await contract.TokensperCelo()
+        setTokenspercelo(ethers.utils.formatEther(tokenspercello.toString()))
+        const celopertokenss = await contract.PricecRecy()
+        setceloPerTokens(ethers.utils.formatEther(celopertokenss.toString()))
+        setDataloaded(true)
+      } 
+    loaddata()
+    }, [])
 
-     const deeplinkMetamask = () => { window.location.href = `https://metamask.app.link/dapp/${pageURL}` };
-
-   window.onload = function () {
-
+    window.onload = function () {
       async function handleaccountchange() {
-         const accounts = await window.ethereum.request({ method: "eth_accounts" });
-         const isConnected = !!accounts.length;
-         isConnected ? setWalletconnected(true) : setWalletconnected(false) 
+          const accounts = await window.ethereum.request({ method: "eth_accounts" });
+          const isConnected = !!accounts.length;
+          isConnected ? setWalletconnected(true) : setWalletconnected(false) 
       }
 
       async function handlechainchange() {
-         const mmprovider = await new ethers.providers.Web3Provider(window.ethereum)
-         setMetamaskprovider(mmprovider)
-         console.log("newprovidersetted")
+          const mmprovider = await new ethers.providers.Web3Provider(window.ethereum)
+          setMetamaskprovider(mmprovider)
+          console.log("newprovidersetted")
       }
 
       if (window.ethereum !== "undefined") {
-         window.ethereum.on('accountsChanged',() => {handleaccountchange()} );
-         setmetamask(true)
+          window.ethereum.on('accountsChanged',() => {handleaccountchange()} );
+          setmetamask(true)
       } else {setmetamask(false)}
       
       if (window.ethereum !== "undefined") {
-         window.ethereum.on('chainChanged',() => {handlechainchange()} );
-         setmetamask(true)
+          window.ethereum.on('chainChanged',() => {handlechainchange()} );
+          setmetamask(true)
       } else {setmetamask(false)}
-
-   }
-
-   const networks = {
-    celo: {
-      chainId: `0x${Number(42220).toString(16)}`,
-      chainName: "Celo Mainnet",
-      nativeCurrency :{
-        name:"CELO",
-        symbol:"CELO",
-        decimals:18 
-      },
-        rpcUrls: ["https://forno.celo.org"],
-        blockExplorerUrls: ["https://explorer.celo.org"]
     }
-   }
 
-   const changeNetwork = async () => {
+  const networks = {
+    celo: {
+    chainId: `0x${Number(42220).toString(16)}`,
+    chainName: "Celo Mainnet",
+    nativeCurrency :{
+      name:"CELO",
+      symbol:"CELO",
+      decimals:18 
+    },
+      rpcUrls: ["https://forno.celo.org"],
+      blockExplorerUrls: ["https://explorer.celo.org"]
+    }
+  }
+      
+  const deeplinkMetamask = () => { 
+    window.location.href = `https://metamask.app.link/dapp/${pageURL}` 
+  }
+
+  const changeNetwork = async () => {
     await window.ethereum.request({
       method: "wallet_addEthereumChain",
       params: [
@@ -123,151 +110,125 @@ const Minter = () => {
         }
       ]
     })
-   }
+  }
 
-   const  handleInputChange = async (event) => {
-      setBuyAmount(event.target.value)
-      console.log("buyamount", buyAmount)
-   }
+  const  handleInputChange = async (event) => {
+  setBuyAmount(event.target.value)
+  console.log("buyamount", buyAmount)
+  }
 
-   async function connectWallet () {
-    console.log("metamask", metamask)
-    if (!metamask) {
-      deeplinkMetamask()
-    }
-    const chainIdbg = await window.ethereum.chainId
-    console.log("window.ethereum chainIdbg connectwallet",chainIdbg)
-    console.log("metamaskprovider connectwallet",metamaskprovider)
-    console.log("networks.celo.chainId connectwallet",networks.celo.chainId)
-
-    if (chainIdbg !== networks.celo.chainId) {
-      await changeNetwork()
-        const provider = new ethers.providers.Web3Provider(window.ethereum)
-        setMetamaskprovider(provider)
-        await provider.send("eth_requestAccounts",[])
-        setWalletconnected(true)
-    } else {
+  async function connectWallet () {
+  const chainIdbg = await window.ethereum.chainId
+  if (!metamask) {
+    deeplinkMetamask()
+  }
+  if (chainIdbg !== networks.celo.chainId) {
+    await changeNetwork()
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       setMetamaskprovider(provider)
       await provider.send("eth_requestAccounts",[])
       setWalletconnected(true)
+  } else {
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    setMetamaskprovider(provider)
+    await provider.send("eth_requestAccounts",[])
+    setWalletconnected(true)
+  }
+  }
 
-         
+  async function buy() {
+  const chainIdbg = await window.ethereum.chainId
+    console.log("buy chainIdbg",chainIdbg)
+    console.log("buy metamaskprovider",metamaskprovider)
 
-    }
- 
-   }
-
-   async function buy() {
-    const chainIdbg = await window.ethereum.chainId
-      console.log("buy chainIdbg",chainIdbg)
-      console.log("buy metamaskprovider",metamaskprovider)
-
-      if (chainIdbg !== networks.celo.chainId) {
-        await changeNetwork()
-      } else {
+    if (chainIdbg !== networks.celo.chainId) {
+      await changeNetwork()
+    } else {
       const signer = await metamaskprovider.getSigner()  
       const signedcontract = await contract.connect(signer)
       const pay = {value: (ethers.utils.parseEther(buyAmount.toString())).toString()}
       console.log("pay", pay) 
-      const buytx = await signedcontract.BuyTokens(pay)
       setmintingmodal(true)
+      const buytx = await signedcontract.BuyTokens(pay)
       await buytx.wait()
       setmintingmodal(false)
-      }
-   }
-
-
-   
+    }
+  }
 
   return (
     <>
-         <div className={styles.about1}>
-            <span className={styles.green}>COMPRAR </span> <span className={styles.grey}>TOKEN </span> 
-         </div>
+      <div className={styles.about1}>
+        <span className={styles.green}>COMPRAR </span> <span className={styles.grey}>TOKEN </span> 
+      </div>
       <div className={styles.bg}>
-
          <div className={styles.container}>
-
             <div className={styles.div1}>
                <img src={images.celodt} alt="" className={styles.polygon}></img>
             </div>
-            
+            {!mintingmodal ?
+              <div className={styles.div2}>
 
+              { dataloaded ?
+                <div className={styles.btndiv} > 
+                  { walletconnected ? "" :
+                      <button className={styles.btnconnect} onClick={() => {connectWallet()}}>CONECTAR CARTEIRA</button>    
+                  }
+                </div>
+                : 
+                <div className={styles.spinner}> </div> 
+              }   
 
-
-            {
-            !mintingmodal 
-            ? 
-               <div className={styles.div2}>
+              {walletconnected ?  
+                <div className={styles.input}>
+                  <div className={styles.inputbox}>
+                    <input placeholder='1 TOKEN' type="number" className={styles.inputfield} onChange={handleInputChange}></input>
+                  </div>
+                  <div className={styles.inputdesc}>
+                    CELO
+                  </div>
+                </div>
+                : 
+                "" 
+              }
                   
-                  { dataloaded ?
+              { walletconnected ?  
+                <div className={styles.input}>
+                  <div className={styles.outputbox}>
+                    {(Number(tokensperCelo) * buyAmount).toFixed(2)}
+                  </div>
+                  <div className={styles.inputdesc}>
+                    cRECY
+                  </div>
+                </div>
+                :
+                ""
+              }
 
-                     <div className={styles.btndiv} > 
-                        { walletconnected ? "" :
-                           <button className={styles.btnconnect} onClick={() => {connectWallet()}}>CONECTAR CARTEIRA</button>    
-                        }
-                     </div>
-                  : <div className={styles.spinner}> </div> }   
+              { walletconnected ?    
+                <button className={styles.btnmint} onClick={()=>{buy()}}>COMPRAR</button>
+                :
+                ""
+              } 
+              </div>
 
-                    
-
-                  {walletconnected ?  
-                    <div className={styles.input}>
-                      <div className={styles.inputbox}>
-                        <input placeholder='1 TOKEN' type="number" className={styles.inputfield} onChange={handleInputChange}></input>
-                      </div>
-                      <div className={styles.inputdesc}>
-                        CELO
-                      </div>
-                          
-                    </div>
-                  : "" }
-                  
-                  {walletconnected ?  
-                  
-                    <div className={styles.input}>
-                      <div className={styles.outputbox}>
-                      {(Number(tokensperCelo) * buyAmount).toFixed(2)}
-                      </div>
-                      <div className={styles.inputdesc}>
-                        cRECY
-                      </div>
-                     
-                    </div>
-                  : "" }
-
-                  {walletconnected ?    
-                     <button className={styles.btnmint} onClick={()=>{buy()}}>COMPRAR</button>
-                  : "" } 
-               </div>
              : 
-               <div className={styles.modal}>
-                  <div className={styles.spinner}> </div>
-                  <span className={styles.supply}>TRANSACTION IN PROCESS</span>
-               </div> 
-            }
 
-            { dataloaded ? 
-              <div className={styles.price}>
-                <a className={styles.asupply}>1</a> cRECY = &nbsp;
-                <span className={styles.asupply}>{celoPerTokens}</span> CELO
+              <div className={styles.modal}>
+                <div className={styles.spinner}> </div>
+                <span className={styles.price}>TRANSAÇÃO EM PROCESSO...</span>
               </div> 
-              :
-              ""
             }
-            
-            
-                           
-             
 
-          
-
-
+          { dataloaded ? 
+            <div className={styles.price}>
+              <span className={styles.asupply}>1</span> cRECY = &nbsp;
+              <span className={styles.asupply}>{celoPerTokens}</span> CELO
+            </div> 
+            :
+            ""
+          }
          </div>
-         
       </div>
-
     </>
   )
 }

@@ -19,26 +19,21 @@ const roadmapdata = [
 
 const Roadmap = () => {
   return (
-     <>
-     
-     <div className={styles.container} id="ROADMAP">
-         
-         <div className={styles.header}>ROAD<span className={styles.green}>MAP</span></div>
-     
-         <div className={styles.cardcontainer} >
-            {roadmapdata.map(cardinfo=>(
-               <div>
+    <>
+      <div className={styles.container} id="ROADMAP">
+          <div className={styles.header}>
+            ROAD<span className={styles.green}>MAP</span>
+          </div>
+          <div className={styles.cardcontainer} >
+              {roadmapdata.map(cardinfo=>(
+                <div>
                   <RoadmapCard
                   cardinfo={cardinfo[0]}
                   />
-               </div>
-            ))}
-         </div>
-
-     
-     
-     </div>
-
+                </div>
+              ))}
+          </div>
+      </div>
     </>
   )
 }

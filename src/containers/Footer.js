@@ -10,14 +10,14 @@ const styles = {
 const Footer = () => {
   return (
     <>
-    <div className={styles.container}>
-    <a href='https://detrashtoken.com'>
-      <img src={images.dtlogo2} className={styles.img} alt=''></img>
-      </a>
-    </div>
-    <div className={styles.c2}>
-      <a href='https://detrashtoken.com'>DeTrashToken.com</a>
-    </div>
+      <div className={styles.container}>
+        <a href='https://detrashtoken.com'>
+          <img src={images.dtlogo2} className={styles.img} alt=''></img>
+        </a>
+      </div>
+      <div className={styles.c2}>
+        <a href='https://detrashtoken.com'>DeTrashToken.com</a>
+      </div>
     </>
 
   )

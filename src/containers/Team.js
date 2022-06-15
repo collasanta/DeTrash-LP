@@ -20,20 +20,20 @@ const Team = () => {
   return (
      <>
       <div className={styles.container} id="EQUIPE" >
-         <div className={styles.header} > A <span className={styles.purple}>EQUIPE</span> </div>
+         <div className={styles.header} >
+           A <span className={styles.purple}>EQUIPE</span> 
+          </div>
       </div>
-      
       <div className={styles.container2}>
-
-         <div className={styles.cardcontainer} >
-               {teamdata.map(cardinfo=>(
-                  <div>
-                     <TeamCard
-                     cardinfo={cardinfo[0]}
-                     />
-                  </div>
-               ))}
+        <div className={styles.cardcontainer} >
+          {teamdata.map(cardinfo=>(
+            <div>
+              <TeamCard
+                cardinfo={cardinfo[0]}
+              />
             </div>
+          ))}
+        </div>
       </div>
     </>
   )
