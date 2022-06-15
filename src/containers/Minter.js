@@ -69,7 +69,7 @@ const Minter = () => {
       async function handlechainchange() {
           const mmprovider = await new ethers.providers.Web3Provider(window.ethereum)
           setMetamaskprovider(mmprovider)
-          console.log("newprovidersetted")
+          // console.log("newprovidersetted")
       }
 
       if (window.ethereum !== "undefined") {
@@ -114,7 +114,6 @@ const Minter = () => {
 
   const  handleInputChange = async (event) => {
   setBuyAmount(event.target.value)
-  console.log("buyamount", buyAmount)
   }
 
   async function connectWallet () {
@@ -138,18 +137,15 @@ const Minter = () => {
 
   async function buy() {
   const chainIdbg = await window.ethereum.chainId
-    console.log("buy chainIdbg",chainIdbg)
-    console.log("buy metamaskprovider",metamaskprovider)
-
     if (chainIdbg !== networks.celo.chainId) {
       await changeNetwork()
     } else {
       const signer = await metamaskprovider.getSigner()  
       const signedcontract = await contract.connect(signer)
       const pay = {value: (ethers.utils.parseEther(buyAmount.toString())).toString()}
-      console.log("pay", pay) 
-      setmintingmodal(true)
+      // console.log("pay", pay) 
       const buytx = await signedcontract.BuyTokens(pay)
+      setmintingmodal(true)
       await buytx.wait()
       setmintingmodal(false)
     }
@@ -221,7 +217,7 @@ const Minter = () => {
 
           { dataloaded ? 
             <div className={styles.price}>
-              <span className={styles.asupply}>1</span> cRECY = &nbsp;
+              <span className={styles.asupply}>1.0</span> cRECY = &nbsp;
               <span className={styles.asupply}>{celoPerTokens}</span> CELO
             </div> 
             :
