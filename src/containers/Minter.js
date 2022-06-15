@@ -142,8 +142,11 @@ const Minter = () => {
     } else {
       const signer = await metamaskprovider.getSigner()  
       const signedcontract = await contract.connect(signer)
-      const pay = {value: (ethers.utils.parseEther(buyAmount.toString())).toString()}
-      // console.log("pay", pay) 
+      // const pay = {value: (ethers.utils.parseEther(buyAmount.toString())).toString()}
+      // const pay = {value: ethers.BigNumber.from(buyAmount)}
+      console.log("buyamount", buyAmount)
+      const pay = {value: ethers.utils.parseEther(buyAmount), gasLimit: "40000"}
+      console.log("pay", pay) 
       const buytx = await signedcontract.BuyTokens(pay)
       setmintingmodal(true)
       await buytx.wait()
