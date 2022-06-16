@@ -98,9 +98,10 @@ const Minter = () => {
     }
   }
 
-  const deeplinkMetamask = () => {
+  const deeplinkMetamask = async () => {
     window.location.href = `https://metamask.app.link/dapp/${pageURL}`
   }
+  console.log(deeplinkMetamask)
 
   const changeNetwork = async () => {
     await window.ethereum.request({
@@ -118,10 +119,10 @@ const Minter = () => {
   }
 
   async function connectWallet() {
-    const chainIdbg = await window.ethereum.chainId
     if (!metamask) {
-      deeplinkMetamask()
+      return deeplinkMetamask();
     }
+    const chainIdbg = await window.ethereum.chainId
     if (chainIdbg !== networks.celo.chainId) {
       await changeNetwork()
       const provider = new ethers.providers.Web3Provider(window.ethereum)
