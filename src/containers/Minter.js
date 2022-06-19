@@ -157,20 +157,45 @@ const Minter = () => {
     chainId = network.chainId
     setLibrary(library);
     setChainId(chainId);
-    console.log("chainIdafet", chainId)
-    // if (chainId === 42220) {
-    //   setWalletconnected(true)
-    //   }
-    
-    
-    console.log("provider after", provider)
-    console.log("library after", library)
+
   };
 
   useEffect(() => {
-    if (chainId === 42220) {
-      setWalletconnected(true)
-      }
+
+    if (provider?.on) {
+
+      const handleChainChanged = async () => {
+        let library = new ethers.providers.Web3Provider(provider);
+        let network = await library.getNetwork();
+        let chainId = network.chainId
+        console.log("chainId", chainId)
+        if (chainId !== 42220) {
+          setWalletconnected(false)
+          } else { setWalletconnected(true) }
+      };
+
+      const handleDisconnect = () => {
+        setWalletconnected(false)
+      };
+
+      provider.on("chainChanged", handleChainChanged);
+      provider.on("disconnect", handleDisconnect);
+
+      return () => {
+        if (provider.removeListener) {
+          // provider.removeListener("accountsChanged", handleAccountsChanged);
+          provider.removeListener("chainChanged", handleChainChanged);
+          provider.removeListener("disconnect", handleDisconnect);
+        }
+      };
+    }
+  }, [provider]);
+
+
+  useEffect(() => {
+    if (chainId !== 42220) {
+      setWalletconnected(false)
+      } else { setWalletconnected(true) }
   }, [chainId])
 
   async function buy() {
