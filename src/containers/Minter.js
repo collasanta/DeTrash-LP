@@ -5,6 +5,10 @@ import { useEffect } from 'react';
 import { ethers } from 'ethers'
 import abi from '../assets/VENDOR.json'
 import axios from "axios";
+import WalletConnectProvider from "@walletconnect/web3-provider";
+import Web3Modal from "web3modal";
+// import { toHex, truncateAddress } from "./utils";
+
 
 const styles = {
   bg: `bg-[#ebf6ff] rounded-full shadow-l mx-auto max-w-[500px] min-w-[375px] shadow-lg px-[10px] pt-[20px] pb-[10px] flex justify-center`,
@@ -28,24 +32,60 @@ const styles = {
   price: ` text-center mx-6 font-[Kollektif] text-[18px] pt-[15px] pb-[15px] text-[#7d818c]`,
 }
 
+const providerOptions = {
+  walletconnect: {
+    package: WalletConnectProvider, // required
+    options: {
+      rpc: {
+        1: "https://rpc.ankr.com/celo",
+      },
+    }
+  }
+};
+
+const web3Modal = new Web3Modal({
+  network: "Celo", // optional
+  // cacheProvider: true, // optional
+  providerOptions // required
+});
+
+const networks = {
+  celo: {
+    chainId: `0x${Number(42220).toString(16)}`,
+    chainName: "Celo Mainnet",
+    nativeCurrency: {
+      name: "CELO",
+      symbol: "CELO",
+      decimals: 18
+    },
+    rpcUrls: ["https://forno.celo.org"],
+    blockExplorerUrls: ["https://explorer.celo.org"]
+  }
+}
+
 const address = "0x6FF99dD8E23BbfB9340Aa6eE8878917229505537"
 const rpcurlprovider = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/celo")
 const contract = new ethers.Contract(address, abi, rpcurlprovider)
 
 const Minter = () => {
+  const [provider, setProvider] = useState();
+  const [library, setLibrary] = useState();
+  const [account, setAccount] = useState();
+  const [signature, setSignature] = useState("");
+  const [error, setError] = useState("");
+  const [chainId, setChainId] = useState();
+  const [chainIdHEX, setChainIdHEX] = useState("")
+  const [network, setNetwork] = useState();
+  const [message, setMessage] = useState("");
+  const [signedMessage, setSignedMessage] = useState("");
+  const [verified, setVerified] = useState();
   const [buyAmount, setBuyAmount] = useState(1)
-  const [metamask, setmetamask] = useState(false)
   const [walletconnected, setWalletconnected] = useState(false)
-  const [metamaskprovider, setMetamaskprovider] = useState([])
   const [mintingmodal, setmintingmodal] = useState(false)
   const [dataloaded, setDataloaded] = useState(false)
   const [tokensperCelo, setTokenspercelo] = useState()
   const [celoPerTokens, setceloPerTokens] = useState()
-  const [pageURL, setPageURL] = useState(0);
 
-  useEffect(() => {
-    setPageURL(window.location.href.replace(/^https?:\/\//, ''));
-  }, []);
 
   useEffect(() => {
     const rpcurlprovider = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/celo")
@@ -59,85 +99,7 @@ const Minter = () => {
     }
     loaddata()
   }, [])
-
-  window.onload = function () {
-    async function handleaccountchange() {
-      const accounts = await window.ethereum.request({ method: "eth_accounts" });
-      const isConnected = !!accounts.length;
-      isConnected ? setWalletconnected(true) : setWalletconnected(false)
-    }
-
-    async function handlechainchange() {
-      const mmprovider = await new ethers.providers.Web3Provider(window.ethereum)
-      setMetamaskprovider(mmprovider)
-      // console.log("newprovidersetted")
-    }
-
-    if (window.ethereum !== "undefined") {
-      window.ethereum.on('accountsChanged', () => { handleaccountchange() });
-      setmetamask(true)
-    } else { setmetamask(false) }
-
-    if (window.ethereum !== "undefined") {
-      window.ethereum.on('chainChanged', () => { handlechainchange() });
-      setmetamask(true)
-    } else { setmetamask(false) }
-  }
-
-  const networks = {
-    celo: {
-      chainId: `0x${Number(42220).toString(16)}`,
-      chainName: "Celo Mainnet",
-      nativeCurrency: {
-        name: "CELO",
-        symbol: "CELO",
-        decimals: 18
-      },
-      rpcUrls: ["https://forno.celo.org"],
-      blockExplorerUrls: ["https://explorer.celo.org"]
-    }
-  }
-
-  const deeplinkMetamask = async () => {
-    window.location.href = `https://metamask.app.link/dapp/${pageURL}`
-  }
-  console.log(deeplinkMetamask)
-
-  const changeNetwork = async () => {
-    await window.ethereum.request({
-      method: "wallet_addEthereumChain",
-      params: [
-        {
-          ...networks.celo
-        }
-      ]
-    })
-  }
-
-  const handleInputChange = async (event) => {
-    setBuyAmount(event.target.value)
-  }
-
-  async function connectWallet() {
-    if (!metamask) {
-      return deeplinkMetamask();
-    }
-    const chainIdbg = await window.ethereum.chainId
-    if (chainIdbg !== networks.celo.chainId) {
-      await changeNetwork()
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
-      setMetamaskprovider(provider)
-      await provider.send("eth_requestAccounts", [])
-      setWalletconnected(true)
-    } else {
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
-      setMetamaskprovider(provider)
-      await provider.send("eth_requestAccounts", [])
-      setWalletconnected(true)
-    }
-  }
-
-
+  
   async function gasPriceEth() {
     try {
       const { data: { result: gasPrice } } = await axios.post('https://eth-mainnet.alchemyapi.io/v2/cLBYf3MjB7MAcWCsT_6OFc19nnoTEZMx', {
@@ -157,12 +119,63 @@ const Minter = () => {
     }
   }
 
+  const changeNetwork = async (library, chainId) => {
+    if (chainId !== 42220) {
+      await library.provider.request({
+        method: "wallet_addEthereumChain",
+        params: [
+          {
+            ...networks.celo
+          }
+        ]
+      }) 
+    }
+  }
+
+
+  const connectWallet = async () => {
+
+    const provider = await web3Modal.connect();
+    let library = new ethers.providers.Web3Provider(provider);
+    const accounts = await library.listAccounts();
+    let network = await library.getNetwork();
+    let chainId = network.chainId
+    
+    setProvider(provider);
+    setLibrary(library);
+    setChainId(chainId);
+
+    console.log("provider before", provider)
+    console.log("library before", library)
+    if (accounts) setAccount(accounts[0]);
+      
+
+    await changeNetwork(library, chainId)
+
+    library = new ethers.providers.Web3Provider(provider);
+    network = await library.getNetwork();
+    chainId = network.chainId
+    setLibrary(library);
+    setChainId(chainId);
+    console.log("chainIdafet", chainId)
+    // if (chainId === 42220) {
+    //   setWalletconnected(true)
+    //   }
+    
+    
+    console.log("provider after", provider)
+    console.log("library after", library)
+  };
+
+  useEffect(() => {
+    if (chainId === 42220) {
+      setWalletconnected(true)
+      }
+  }, [chainId])
+
   async function buy() {
-    const chainIdbg = await window.ethereum.chainId
-    if (chainIdbg !== networks.celo.chainId) {
-      await changeNetwork()
-    } else {
-      const signer = await metamaskprovider.getSigner()
+    
+      const signer = await library.getSigner()
       const signedcontract = await contract.connect(signer)
       const gasPrice = await gasPriceEth();
       const buytx = await signedcontract.BuyTokens({
@@ -173,7 +186,11 @@ const Minter = () => {
       setmintingmodal(true)
       await buytx.wait()
       setmintingmodal(false)
-    }
+    
+  }
+
+  const handleInputChange = async (event) => {
+    setBuyAmount(event.target.value)
   }
 
   return (
@@ -250,6 +267,8 @@ const Minter = () => {
           }
         </div>
       </div>
+      {/* //--------------------------------------- */}
+      
     </>
   )
 }
