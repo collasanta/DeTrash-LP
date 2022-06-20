@@ -45,7 +45,7 @@ const providerOptions = {
 };
 
 const web3Modal = new Web3Modal({
-  network: "Celo", // optional
+  // network: "Celo", // optional
   // cacheProvider: true, // optional
   providerOptions // required
 });
