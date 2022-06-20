@@ -38,14 +38,14 @@ const providerOptions = {
     package: WalletConnectProvider, // required
     options: {
       rpc: {
-        1: "https://rpc.ankr.com/celo",
+        42220: "https://rpc.ankr.com/celo",
       },
     }
   }
 };
 
 const web3Modal = new Web3Modal({
-  // network: "Celo", // optional
+  network: "celo", // optional
   // cacheProvider: true, // optional
   providerOptions // required
 });
