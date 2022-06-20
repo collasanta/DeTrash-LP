@@ -158,7 +158,7 @@ const Minter = () => {
     chainId = network.chainId
     setLibrary(library);
     setChainId(chainId);
-
+    setWalletconnected(true)
   };
 
   useEffect(() => {
@@ -203,11 +203,27 @@ const Minter = () => {
   }, [provider]);
 
 
+
+
   useEffect(() => {
     if (chainId !== 42220) {
       setWalletconnected(false)
       } else { setWalletconnected(true) }
   }, [chainId])
+
+  useEffect(() => {
+
+    const handleProviderChanged = async () => {
+    let library = new ethers.providers.Web3Provider(provider);
+    let network = await library.getNetwork();
+    let chainId = network.chainId
+    if (chainId !== 42220) {
+      setWalletconnected(false)
+      } else { setWalletconnected(true) }
+    }
+
+    handleProviderChanged()
+  }, [provider, library])
 
   async function buy() {
     
