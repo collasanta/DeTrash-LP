@@ -219,6 +219,7 @@ const Minter = () => {
     let chainId = network.chainId
     if (chainId !== 42220) {
       setWalletconnected(false)
+      changeNetwork(library, chainId)
       } else { setWalletconnected(true) }
     }
 
