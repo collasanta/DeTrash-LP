@@ -7,6 +7,7 @@ import abi from '../assets/VENDOR.json'
 import axios from "axios";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import Web3Modal from "web3modal";
+import { disconnect } from 'process';
 // import { toHex, truncateAddress } from "./utils";
 
 
@@ -164,26 +165,36 @@ const Minter = () => {
 
     if (provider?.on) {
 
+      const handleAccountsChanged = async () => {
+        let library = new ethers.providers.Web3Provider(provider);
+        const accounts = await library.listAccounts();
+        console.log("accounts.length", accounts.length)
+        if (accounts.length === 0) {
+          setWalletconnected(false)
+        }
+      }
+      
       const handleChainChanged = async () => {
         let library = new ethers.providers.Web3Provider(provider);
         let network = await library.getNetwork();
         let chainId = network.chainId
-        console.log("chainId", chainId)
         if (chainId !== 42220) {
           setWalletconnected(false)
           } else { setWalletconnected(true) }
       };
 
-      const handleDisconnect = () => {
+      const handleDisconnect = async () => {
+        console.log("disconnect", walletconnected)
         setWalletconnected(false)
       };
 
+      provider.on("accountsChanged", handleAccountsChanged);
       provider.on("chainChanged", handleChainChanged);
       provider.on("disconnect", handleDisconnect);
 
       return () => {
         if (provider.removeListener) {
-          // provider.removeListener("accountsChanged", handleAccountsChanged);
+          provider.removeListener("accountsChanged", handleAccountsChanged);
           provider.removeListener("chainChanged", handleChainChanged);
           provider.removeListener("disconnect", handleDisconnect);
         }
