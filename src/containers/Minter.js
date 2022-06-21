@@ -233,7 +233,7 @@ const Minter = () => {
       const gasPrice = await gasPriceEth();
       const buytx = await signedcontract.BuyTokens({
         value: ethers.utils.parseEther(buyAmount),
-        gasLimit: '70000',
+        gasLimit: '120000',
         gasPrice: gasPrice
       });
       setmintingmodal(true)
