@@ -13,6 +13,7 @@ import pl from './polygon.png';
 import dtlogo from './detrashlogo.png';
 import dtlogo2 from './detrashlogo2.png';
 import celodt from './celodt.png';
+import recy from './RECYlarge.png';
 
 
 
@@ -20,6 +21,7 @@ export default {
    dtlogo,
    dtlogo2,
    celodt,
+   recy,
    p1,
    p2,
    p3,

@@ -12,11 +12,15 @@ import { disconnect } from 'process';
 
 
 const styles = {
-  bg: `bg-[#ebf6ff] rounded-full shadow-l mx-auto max-w-[500px] min-w-[375px] shadow-lg px-[10px] pt-[20px] pb-[10px] flex justify-center`,
+  bgrecy:"w-full h-full object-cover ",
+  bg: `bg-[#ebf6ff] z-201 relative  rounded-full shadow-l mx-auto max-w-[500px] min-w-[375px] shadow-lg px-[10px] pt-[20px] pb-[10px] flex justify-center`,
+  center:`flex justify-center justify-self-center place-content-center place-self-center`,
+  imgrecy:'w-[1520px] h-[1520px]  z-1 object-cover opacity-10 absolute  sm:-top-[400px] -top-[350px]',
   about1: `font-[Kollektif]  text-[35px] text-center md:text-[40px] pt-[100px] pb-[20px]`,
   green: `font-[Kollektif]  text-[#013a81]`,
   grey: `font-[Kollektif] `,
-  container: `flex flex-col w-[360px] md:w-[600px] justify-center  `,
+  geral:'',
+  container: `flex flex-col w-[360px] md:w-[600px] z-200 relative justify-center`,
   div1: `pb-3`,
   div2: ` mx-auto  w-[360px] text-center flex flex-col space-y-2 `,
   input: `font-[Kollektif] text-[26px] mx-5 flex justify-between  h-[60px] items-center  bg-[#ffffff] rounded-full px-[30px] border-2 border-blue-100  `,
@@ -248,80 +252,96 @@ const Minter = () => {
 
   return (
     <>
-      <div className={styles.about1}>
-        <span className={styles.green}>COMPRAR </span> <span className={styles.grey}>TOKEN </span>
-      </div>
-      <div className={styles.bg}>
-        <div className={styles.container}>
-          <div className={styles.div1}>
-            <img src={images.celodt} alt="" className={styles.polygon}></img>
-          </div>
-          {!mintingmodal ?
-            <div className={styles.div2}>
-
-              {dataloaded ?
-                <div className={styles.btndiv} >
-                  {walletconnected ? "" :
-                    <button className={styles.btnconnect} onClick={() => { connectWallet() }}>CONECTAR CARTEIRA</button>
-                  }
-                </div>
-                :
-                <div className={styles.spinner}> </div>
-              }
-
-              {walletconnected ?
-                <div className={styles.input}>
-                  <div className={styles.inputbox}>
-                    <input placeholder='1 TOKEN' type="number" className={styles.inputfield} onChange={handleInputChange}></input>
-                  </div>
-                  <div className={styles.inputdesc}>
-                    CELO
-                  </div>
-                </div>
-                :
-                ""
-              }
-
-              {walletconnected ?
-                <div className={styles.input}>
-                  <div className={styles.outputbox}>
-                    {(Number(tokensperCelo) * buyAmount).toFixed(2)}
-                  </div>
-                  <div className={styles.inputdesc}>
-                    cRECY
-                  </div>
-                </div>
-                :
-                ""
-              }
-
-              {walletconnected ?
-                <button className={styles.btnmint} onClick={() => { buy() }}>COMPRAR</button>
-                :
-                ""
-              }
-            </div>
-
-            :
-
-            <div className={styles.modal}>
-              <div className={styles.spinner}> </div>
-              <span className={styles.price}>TRANSAÇÃO EM PROCESSO...</span>
-            </div>
-          }
-
-          {dataloaded ?
-            <div className={styles.price}>
-              <span className={styles.asupply}>1.0</span> cRECY = &nbsp;
-              <span className={styles.asupply}>{celoPerTokens}</span> CELO
-            </div>
-            :
-            ""
-          }
-        </div>
-      </div>
-      {/* //--------------------------------------- */}
       
+      <div className={styles.bgrecy}  >
+
+      <div className={styles.center}>
+
+      <img src={images.recy} alt="" className={styles.imgrecy} />  
+      </div>
+
+
+        
+        <div className={styles.about1} >
+          <span className={styles.green}>COMPRAR </span> <span className={styles.grey}>TOKEN </span>
+        </div>
+        
+
+        <div className={styles.bg}>
+
+          <div className={styles.container}>
+            <div className={styles.div1}>
+              <img src={images.celodt} alt="" className={styles.polygon}></img>
+            </div>
+            {!mintingmodal ?
+              <div className={styles.div2}>
+
+                {dataloaded ?
+                  <div className={styles.btndiv} >
+                    {walletconnected ? "" :
+                      <button className={styles.btnconnect} onClick={() => { connectWallet() }}>CONECTAR CARTEIRA</button>
+                    }
+                  </div>
+                  :
+                  <div className={styles.spinner}> </div>
+                }
+
+                {walletconnected ?
+                  <div className={styles.input}>
+                    <div className={styles.inputbox}>
+                      <input placeholder='1 TOKEN' type="number" className={styles.inputfield} onChange={handleInputChange}></input>
+                    </div>
+                    <div className={styles.inputdesc}>
+                      CELO
+                    </div>
+                  </div>
+                  :
+                  ""
+                }
+
+                {walletconnected ?
+                  <div className={styles.input}>
+                    <div className={styles.outputbox}>
+                      {(Number(tokensperCelo) * buyAmount).toFixed(2)}
+                    </div>
+                    <div className={styles.inputdesc}>
+                      cRECY
+                    </div>
+                  </div>
+                  :
+                  ""
+                }
+
+                {walletconnected ?
+                  <button className={styles.btnmint} onClick={() => { buy() }}>COMPRAR</button>
+                  :
+                  ""
+                }
+              </div>
+
+              :
+
+              <div className={styles.modal}>
+                <div className={styles.spinner}> </div>
+                <span className={styles.price}>TRANSAÇÃO EM PROCESSO...</span>
+              </div>
+            }
+
+            {dataloaded ?
+              <div className={styles.price}>
+                <span className={styles.asupply}>1.0</span> cRECY = &nbsp;
+                <span className={styles.asupply}>{celoPerTokens}</span> CELO
+              </div>
+              :
+              ""
+            }
+          </div>
+        </div>
+        
+      </div>
+          
+      
+      {/* //--------------------------------------- */}
     </>
   )
 }
