@@ -7,9 +7,7 @@ import abi from '../assets/VENDOR.json'
 import axios from "axios";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import Web3Modal from "web3modal";
-import { disconnect } from 'process';
-// import { toHex, truncateAddress } from "./utils";
-
+import { useTranslation } from "react-i18next";
 
 const styles = {
   bgrecy:"w-full h-full object-cover ",
@@ -90,7 +88,7 @@ const Minter = () => {
   const [dataloaded, setDataloaded] = useState(false)
   const [tokensperCelo, setTokenspercelo] = useState()
   const [celoPerTokens, setceloPerTokens] = useState()
-
+  const { t } = useTranslation();
 
   useEffect(() => {
     const rpcurlprovider = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/celo")
@@ -263,7 +261,7 @@ const Minter = () => {
 
         
         <div className={styles.about1} >
-          <span className={styles.green}>COMPRAR </span> <span className={styles.grey}>TOKEN </span>
+          <span className={styles.green}>{t("COMPRAR")}</span> <span className={styles.grey}>TOKEN </span>
         </div>
         
 
@@ -279,7 +277,7 @@ const Minter = () => {
                 {dataloaded ?
                   <div className={styles.btndiv} >
                     {walletconnected ? "" :
-                      <button className={styles.btnconnect} onClick={() => { connectWallet() }}>CONECTAR CARTEIRA</button>
+                      <button className={styles.btnconnect} onClick={() => { connectWallet() }}>{t("CONECTAR CARTEIRA")}</button>
                     }
                   </div>
                   :
@@ -313,7 +311,7 @@ const Minter = () => {
                 }
 
                 {walletconnected ?
-                  <button className={styles.btnmint} onClick={() => { buy() }}>COMPRAR</button>
+                  <button className={styles.btnmint} onClick={() => { buy() }}>{t("COMPRAR")}</button>
                   :
                   ""
                 }
@@ -323,7 +321,7 @@ const Minter = () => {
 
               <div className={styles.modal}>
                 <div className={styles.spinner}> </div>
-                <span className={styles.price}>TRANSAÇÃO EM PROCESSO...</span>
+                <span className={styles.price}>{t("TRANSACAO EM PROCESSO")}...</span>
               </div>
             }
 

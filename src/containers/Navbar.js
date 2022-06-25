@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { HiMenuAlt4, HiX } from 'react-icons/hi';
 import { motion } from 'framer-motion';
 import { images } from '../assets';
+import { useTranslation } from "react-i18next";
 
 const styles = {
    wrapper: `z-[1] shadow-sm fixed  px-8 h-[70px]  w-screen flex justify-between items-center bg-[#ebf6ff] text-black overflow:hidden`,
@@ -20,6 +21,7 @@ const styles = {
 }
 
 const Navbar = () => {
+  const { t } = useTranslation();
   const [toggle, setToggle] = useState(false)
   return (
     <div className={styles.wrapper}>
@@ -29,7 +31,7 @@ const Navbar = () => {
         </a>
       </div>
       <ul className={styles.menu}>
-        {['SOBRE', 'ROADMAP', 'EQUIPE' ].map((item)=> (
+        {[t("SOBRE"), 'ROADMAP', t("EQUIPE") ].map((item)=> (
         <li className={styles.menuitem} key={`link-${item}`}>
           <div />
           <a href={`#${item}`}>{item}</a>
@@ -46,7 +48,7 @@ const Navbar = () => {
                   transition={{ duration: 0.85, ease: 'easeOut' }}
                 >
                 <HiX size={35} color='#64b6ac' onClick={() => setToggle(false)} />       
-                  {['SOBRE', 'ROADMAP', 'EQUIPE'].map((item) => (
+                  {[t("SOBRE"), 'ROADMAP', t("EQUIPE")].map((item) => (
                   <li className={styles.sidebaritemhover} key={item}>
                     <a href={`#${item}`} onClick={() => setToggle(false)}>
                         {item}

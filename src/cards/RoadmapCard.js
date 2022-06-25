@@ -10,7 +10,7 @@ const RoadmapCard = ({cardinfo}) => {
       container2: `flex flex-col mx-auto space-y-[-20px] justify-center `,
       image: ` w-[100px] h-[110px] mx-auto mb-[20px] `,
       titlebox: `z-0 hover:bg-[#5BBAEB] bg-[#64B6AC] shadow-md w-[290px]  h-[60px] mx-auto py-[5px]  rounded-full `,
-      title: ` font-[Kollektif] text-white text-[27px] text-center   `,
+      title: ` font-[Kollektif] text-white text-[27px] text-center capitalize  `,
       descbox: `z-1 bg-[#ffffff] shadow-lg p-2 w-[280px] mx-[10px] rounded-[40px] pt-[30px] text-[#4f545c] pb-[10px] `,
       desc: ` font-[Kollektif] text-[23px] text-center   `,
 

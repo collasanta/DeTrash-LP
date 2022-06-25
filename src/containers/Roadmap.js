@@ -1,6 +1,9 @@
 import React from 'react'
 import { images } from '../assets';
 import RoadmapCard from '../cards/RoadmapCard';
+import { useTranslation } from "react-i18next";
+
+
 
 const styles = {
    container: `py-[70px] space-y-4  flex flex-col justify-center bg-[#ebf6ff]`,
@@ -9,15 +12,19 @@ const styles = {
    green: `text-[#5BBAEB]`,
 }
 
-const roadmapdata = [
-   [{title:"1. cRECY Deploy", description:"Desenvolvimento do tokenomics, whitepaper e contrato inteligente do cRECY", image: images.rm2}],
-   [{title:"2. DApp Beta", description:"Lançamento da primeira versão do RECY App com as funções de submeter relatórios de reciclagem, chat entre usuários geolocalização de coleta", image: images.rm4}],
-   [{title:"3. Primeira Cidade", description:"Substituir o sistema atual de coleta de resíduos de uma cidade", image: images.rm3}],
-   [{title:"4. DApp Completo", description:"Lançamento da versão completa do aplicativo com exchange, auditoria de relatórios, staking, integração de nodes e marketplace de recicláveis ara fornecimento para indústria", image: images.rm1}],
-   [{title:"5. DAO", description:"Descentralização da governança através do lançamento de um token de governança", image: images.rm5}],
-]
+
 
 const Roadmap = () => {
+  const { t } = useTranslation();
+
+  const roadmapdata = [
+    [{title:"1. cRECY Deploy", description:t("Desenvolvimento do tokenomics, whitepaper e contrato inteligente do cRECY"), image: images.rm2}],
+    [{title:"2. DApp Beta", description:t("Lançamento da primeira versão do RECY App com as funções de submeter relatórios de reciclagem, chat entre usuários geolocalização de coleta"), image: images.rm4}],
+    [{title:`3. ${t("Primeira Cidade")}`, description:t("card 3 desc"), image: images.rm3}],
+    [{title:`4. DApp ${t("Completo")}`, description:t("card 4 desc"), image: images.rm1}],
+    [{title:"5. DAO", description:t("card 5 desc"), image: images.rm5}],
+ ]
+
   return (
     <>
       <div className={styles.container} id="ROADMAP">

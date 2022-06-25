@@ -1,4 +1,6 @@
 import React from 'react'
+import { useTranslation } from "react-i18next";
+
 
 const styles ={
    container: `space-y-4 flex flex-col justify-center pt-[70px] pb-[70px] `,
@@ -8,14 +10,16 @@ const styles ={
 }
 
 const About = () => {
+  const { t } = useTranslation();
+
   return (
      <>
       <div className={styles.container} id="SOBRE">
          <p className={styles.about1} >
-            TOKENS QUE LIMPAM O <span className={styles.rev}> MUNDO </span>
+         {t("TOKENS QUE LIMPAM O")}  <span className={styles.rev}> {t("MUNDO")} </span>
          </p>
          <div className={styles.about2}>
-         Começamos com o primeiro token para limpar os oceanos, o cRECY. Mas queremos ir muito além para transformar como podemos manter todo o planeta limpo de forma descentralizada, mais transparente e mais eficiente.
+         {t("DESCRICAO CURTA TOKEN")}
          </div>
       </div>
      </>
